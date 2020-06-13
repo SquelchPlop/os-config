@@ -8,12 +8,14 @@ if(Get-InstalledModule | Where-Object {($_.Name -eq "PolicyFileEditor") -and ($_
     Install-Module -Name PolicyFileEditor -RequiredVersion $policyFileEditorVersion -Force 
 }
 
-. ./dsc_configurations/ClientBaseline.ps1
-ClientBaseline -OutputPath ./mof/ClientBaseline
-Start-DscConfiguration -Path ./mof/ -Wait -Verbose -Force
+# Dot source the client configuration
+. ./dsc_configurations/ClientConfiguration.ps1
 
-. ./dsc_configurations/ClientBaseline2.ps1
-ClientBaseline2 -OutputPath ./mof/ClientBaseline2
-Start-DscConfiguration -Path ./mof/ -Wait -Verbose -Force
+# Generate MOFs
+ClientLocalGroupPolicy -ConfigurationData ./dsc_configurations/ClientLocalGroupPolicyData.psd1 -OutputPath ./mof/ClientConfiguration
 
+# Apply DSC configuration
+Start-DscConfiguration -Path ./mof/ClientConfiguration -Wait -Verbose -Force
+
+# Refresh Local Group Policy
 gpupdate
