@@ -1,15 +1,14 @@
 $baseline = @{
-    url      = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Windows%2010%20Version%201909%20and%20Windows%20Server%20Version%201909%20Security%20Baseline.zip"
-    hash     = "17893CAB07BC09C8BD97B44809155484"
+    url  = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Windows%2010%20Version%201909%20and%20Windows%20Server%20Version%201909%20Security%20Baseline.zip"
+    hash = "17893CAB07BC09C8BD97B44809155484"
     name = "windows_10_1909_baseline"
 }
 
 $lgpo = @{
-    url      = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/LGPO.zip"
-    hash     = "AC09D051891AC87577183FC7A09A465A"
+    url  = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/LGPO.zip"
+    hash = "AC09D051891AC87577183FC7A09A465A"
     name = "lgpo"
 }
-
 
 # Download, verify and expand zips
 foreach ($download in @($baseline, $lgpo)) {
