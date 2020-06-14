@@ -1,4 +1,4 @@
-Configuration ClientLocalGroupPolicy {
+Configuration ClientBaseline {
     Import-DscResource -ModuleName 'PolicyFileEditor'
 
     Node $AllNodes.NodeName {

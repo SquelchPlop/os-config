@@ -8,14 +8,26 @@ if(Get-InstalledModule | Where-Object {($_.Name -eq "PolicyFileEditor") -and ($_
     Install-Module -Name PolicyFileEditor -RequiredVersion $policyFileEditorVersion -Force 
 }
 
+# Setup configuration data
+$ConfigurationData =
+@{
+    AllNodes =
+    @(
+        @{
+            NodeName           = "localhost"
+            LocalGroupPolicies = (Import-PowerShellDataFile -Path ./dsc_data/LocalGroupPolicies.psd1).Policies
+        }
+    )
+}
+
 # Dot source the client configuration
-. ./dsc_configurations/ClientConfiguration.ps1
+. ./dsc_configurations/ClientBaseline.ps1
 
 # Generate MOFs
-ClientLocalGroupPolicy -ConfigurationData ./dsc_configurations/ClientLocalGroupPolicyData.psd1 -OutputPath ./mof/ClientConfiguration
+ClientBaseline -ConfigurationData $ConfigurationData -OutputPath ./mof/ClientBaseline
 
 # Apply DSC configuration
-Start-DscConfiguration -Path ./mof/ClientConfiguration -Wait -Verbose -Force
+Start-DscConfiguration -Path ./mof/ClientBaseline -Wait -Verbose -Force
 
 # Refresh Local Group Policy
 gpupdate
