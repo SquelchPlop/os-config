@@ -1,11 +1,11 @@
 @{Policies = @(
         @{
-            Name         = "Disable auto reconnecting2"
-            Ensure       = 'Absent'
+            Name         = "Remove 'Switch User', 'Ease of Access' and 'Language' from home/lock screens"
+            Ensure       = 'Present'
             PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services\fDisableAutoReconnect'
+            KeyValueName = 'SOFTWARE\Microsoft\Windows Embedded\EmbeddedLogon'
             Type         = 'DWord'
-            Data         = '1'
+            Data         = '28'
         }
     )
 }
