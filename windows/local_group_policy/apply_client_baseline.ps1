@@ -1,4 +1,8 @@
-Set-Location $env:temp
+# Create dir
+$workingDir = "$env:temp\local_group_policy\"
+New-Item -ItemType Directory -Force -Path $workingDir
+Set-Location $workingDir
+Remove-Item "$workingDir*" -Recurse | Out-Null #Ensure directory is clean
 
 # Make sure NuGet available
 if ((Get-PackageProvider -Name NuGet).version -lt 2.8.5.208 ) {
@@ -17,7 +21,7 @@ if (-not (Get-Module -ListAvailable –FullyQualifiedName @{ModuleName="Test-PSR
 
 # Download latest DSC configuration and data
 Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_configurations/ClientBaseline.ps1" -OutFile ClientBaseline.ps1
-Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_data/LocalGroupPolicies.psd1" -OutFile LocalGroupPolicies.ps1
+Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_data/LocalGroupPolicies.psd1" -OutFile LocalGroupPolicies.psd1
 
 # Setup configuration data
 $ConfigurationData =
@@ -26,7 +30,7 @@ $ConfigurationData =
     @(
         @{
             NodeName           = "localhost"
-            LocalGroupPolicies = (Import-PowerShellDataFile -Path LocalGroupPolicies.ps1).Policies
+            LocalGroupPolicies = (Import-PowerShellDataFile -Path LocalGroupPolicies.psd1).Policies
         }
     )
 }
@@ -35,7 +39,6 @@ $ConfigurationData =
 . ./ClientBaseline.ps1
 
 # Generate MOFs
-Remove-Item ./mof/ -Recurse | Out-Null
 ClientBaseline -ConfigurationData $ConfigurationData -OutputPath ./mof/
 
 # Apply DSC configuration
