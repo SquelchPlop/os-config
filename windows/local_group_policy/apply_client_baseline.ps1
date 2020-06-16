@@ -22,7 +22,8 @@ if (-not (Get-Module -ListAvailable –FullyQualifiedName @{ModuleName="Test-PSR
 
 # Download latest DSC configuration and data
 Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_configurations/ClientBaseline.ps1" -OutFile ClientBaseline.ps1
-Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_data/LocalGroupPolicies.psd1" -OutFile LocalGroupPolicies.psd1
+Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_data/WindowsGroupPolicies.psd1" -OutFile LocalGroupPolicies.psd1
+Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_data/OfficeGroupPolicies.psd1" -OutFile LocalGroupPolicies.psd1
 
 # Setup configuration data
 $ConfigurationData =
@@ -31,7 +32,9 @@ $ConfigurationData =
     @(
         @{
             NodeName           = "localhost"
-            LocalGroupPolicies = (Import-PowerShellDataFile -Path LocalGroupPolicies.psd1).Policies
+            LocalGroupPolicies = 
+                (Import-PowerShellDataFile -Path WindowsGroupPolicies.psd1).Policies + 
+                (Import-PowerShellDataFile -Path OfficeGroupPolicies.psd1).Policies
         }
     )
 }
