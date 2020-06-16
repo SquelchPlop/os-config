@@ -8,7 +8,7 @@ if ((-not $nuget) -or ($nuget.version -lt 2.8.5.208 )) {
 if (-not (Get-Module -ListAvailable –FullyQualifiedName @{ModuleName="PSWindowsUpdate";ModuleVersion="2.2.0.2"})){
     Install-Module -Name "PSWindowsUpdate" -RequiredVersion "2.2.0.2" -Force 
 }
-Import-Module "PSWindowsUpdate"
+Import-Module PSWindowsUpdate
 
 # Add ServiceID for Windows Update
 Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -Confirm:$false
