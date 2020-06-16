@@ -1,29 +1,35 @@
 ﻿#Only printers in this list can be installed.  Any printers outside this list will be removed.
-$AllowedPrinters = "PRINTER-01 Mono Laser", "PRINTER-02 Colour MFP", "Adobe PDF"
+$AllowedPrinters = "PRINTER-01 Mono Laser", "PRINTER-02 Colour MFP", "Microsoft Print to PDF"
 
-#First printer in this hash table will be set as default.
+#To get minimal drivers (incl. INF file), install the manufacturer driver, then find the driver's directory in the driver store, without the crap.
 $Printers = @(
     @{
         Name = "PRINTER-01 Mono Laser";
         HostAddress = "PRINTER-01";
-        DriverFile = "\\Files\Software\Repository\_Drivers\Brother Enhanced Generic PCL Driver\1.07\eng\BHPCL5E.INF";
+        DriverInstallCommand = "
+            Invoke-WebRequest https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/printers/drivers/brother-generic-pcl5e-1.07.zip -OutFile $env:temp\brother.zip 
+            Expand-Archive $env:temp\brother.zip -DestinationPath $env:temp\brother"
+        DriverFile = "$env:temp\brother\BHPCL5E.INF";
         DriverName="Brother PCL5e Driver";
-        Location="Peaslake Close"; 
-        Duplex=$True;
-        Color=$False;
-        PaperSize="A4";
+        DuplexInstalled=$True;
+        DefaultDuplex=$True
+        DefaultColor=$False;
+        DefaultPaperSize="A4";
     }
     @{
         Name = "PRINTER-02 Colour MFP";
         HostAddress = "PRINTER-02";
-        DriverFile = "\\Files\Software\Repository\_Drivers\HP PW477DW\38.7.1931\hpmaD5114_x64.inf";
+        DriverInstallCommand = "
+            Invoke-WebRequest https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/printers/drivers/hp-pw477dw-pcl6-8.0.1329.6720.zip -OutFile $env:temp\hppw477.zip
+            Expand-Archive $env:temp\hppw477.zip -DestinationPath $env:temp\hppw477
+        "
+        DriverFile = "$env:temp\hppw477\hpmaD5114_x64.inf";
         DriverName="HP PageWide Pro 477dw MFP PCL-6";
-        Location="Peaslake Close"; 
-        Duplex=$True;
-        Color=$True;
-        PaperSize="A4";
+        DuplexInstalled=$True;
+        DefaultDuplex=$True
+        DefaultColor=$False;
+        DefaultPaperSize="A4";
     }
-    
 )
 
 #Remove surplus printers.
@@ -35,19 +41,17 @@ $First=$True
 $Printers | ForEach {
     If(($InstalledPrinters -contains $_.Name) -or ($AllowedPrinters -notcontains $_.Name)){} #If already installed or not allowed, skip
     Else{
-        Invoke-Command {pnputil.exe /add-driver "$($_.DriverFile)"} | Out-Null #Add driver to repo
+        Invoke-Expression $_.DriverInstallCommand
+        Invoke-Command {pnputil.exe /add-driver "$($_.DriverFile)"} | Out-Null #Copy driver to driver store
         Add-PrinterDriver -Name $_.DriverName
         Add-PrinterPort -Name "$($_.HostAddress) Port" -PrinterHostAddress $_.HostAddress
-        Add-Printer -Name $_.Name -PortName "$($_.HostAddress) Port" -DriverName $_.DriverName -Location $_.Location
+        Add-Printer -Name $_.Name -PortName "$($_.HostAddress) Port" -DriverName $_.DriverName
         If($_.Duplex){
             Get-PrinterProperty    -PrinterName $_.Name -PropertyName "Config:DuplexUnit" -ComputerName $env:COMPUTERNAME -ErrorAction Ignore | Set-PrinterProperty -Value "Installed"
-            Set-PrintConfiguration -PrinterName $_.Name -DuplexingMode TwoSidedLongEdge 
+            If($_.DefaultDuplex){
+                Set-PrintConfiguration -PrinterName $_.Name -DuplexingMode TwoSidedLongEdge 
+            }
         }
-        Set-PrintConfiguration -PrinterName $_.Name -Color $_.Color -PaperSize $_.PaperSize
-    }
-    If($First){
-        $First=$False
-        $Default = Get-WmiObject -Query "Select * from win32_printer where name='$($_.Name)'"
-        $Default.SetDefaultPrinter() | Out-Null
+        Set-PrintConfiguration -PrinterName $_.Name -Color $_.DefaultColor -PaperSize $_.DefaultPaperSize
     }
 }
