@@ -72,6 +72,30 @@
             Data         = '1'
         }
         @{
+            Name         = 'Windows Update: Enable Automatic Updates'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\NoAutoUpdate'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
+            Name         = 'Windows Update: Configure Automatic Updates to download and prompt for install'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\AUOptions'
+            Type         = 'DWord'
+            Data         = '3'
+        }
+        @{
+            Name         = 'Windows Update: Receive updates for other Microsoft products'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU\AllowMUUpdateService'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
             Name         = 'Windows Update: Remove access to "Pause updates" feature in UI'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
