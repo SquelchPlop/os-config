@@ -6,7 +6,7 @@ Remove-Item "$workingDir*" -Recurse | Out-Null #Ensure directory is clean
 
 # Make sure NuGet available
 if ((Get-PackageProvider -Name NuGet).version -lt 2.8.5.208 ) {
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Confirm:$False -Force 
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force 
 }
 
 # Make sure PolicyFileEditor available
