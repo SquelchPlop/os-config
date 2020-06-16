@@ -1,7 +1,7 @@
 $baseline = @{
     url  = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Office365-ProPlus-Sept2019-FINAL.zip"
-    hash = "85DD248E8F8A08C0DA3CD34AAC0DE494A9E27BB5B935B1706DBD410C54511A6F"
-    name = "windows_10_1909_baseline"
+    hash = "73CB08FF8125B66226D717976A76D4F8BDF8468417CCCEFCF894559A73751E4C"
+    name = "office365_proplus_baseline"
 }
 
 $lgpo = @{
@@ -31,4 +31,4 @@ Copy-Item  -Path "$env:temp\$($lgpo.name)\lgpo.exe" -Destination "$env:temp\$($b
 
 # Apply
 Set-Location $env:temp\$($baseline.name)\Scripts\
-./Baseline-LocalInstall.ps1 -Win10NonDomainJoined
+./Baseline-LocalInstall.ps1

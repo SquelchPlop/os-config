@@ -5,8 +5,9 @@ Set-Location $workingDir
 Remove-Item "$workingDir*" -Recurse | Out-Null #Ensure directory is clean
 
 # Make sure NuGet available
-if ((Get-PackageProvider -Name NuGet).version -lt 2.8.5.208 ) {
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force 
+$nuget = Get-PackageProvider -Name NuGet -ListAvailable
+if ((-not $nuget) -or ($nuget.version -lt 2.8.5.208 )) {
+    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force -Confirm:$false
 }
 
 # Make sure PolicyFileEditor available
