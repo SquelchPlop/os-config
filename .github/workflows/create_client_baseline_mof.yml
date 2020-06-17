@@ -14,8 +14,7 @@ jobs:
 
     - name: Generate MOF
       run: |
-        #Switch to the DSC dir
-        Set-Location .\desired_state_configuration
+        Set-Location .\windows\desired_state_configuration
 
         #Load all policies
         $localGroupPolicies = Get-ChildItem .\data\policies\ | ForEach-Object{
