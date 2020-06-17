@@ -59,4 +59,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: client_baseline_mof
-        path: ./desired_state_configuration/mof/localhost.mof
+        path: ./windows/desired_state_configuration/mof/localhost.mof
