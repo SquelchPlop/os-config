@@ -1,5 +1,14 @@
+# Policies
+$policyDataFiles = @(
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyBitLocker.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyMicrosoftDefender.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyOffice.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyWindows.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyWindowsUpdate.psd1"
+)
+
 # Create dir
-$workingDir = "$env:temp\local_group_policy\"
+$workingDir = "$env:temp\desired_state_configuration\"
 New-Item -ItemType Directory -Force -Path $workingDir
 Set-Location $workingDir
 Remove-Item "$workingDir*" -Recurse | Out-Null #Ensure directory is clean
@@ -20,10 +29,16 @@ if (-not (Get-Module -ListAvailable –FullyQualifiedName @{ModuleName="Test-PSR
     Install-Module -Name "Test-PSRemoting" -RequiredVersion 1.0.1 -Force 
 }
 
-# Download latest DSC configuration and data
-Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_configurations/ClientBaseline.ps1" -OutFile ClientBaseline.ps1
-Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_data/WindowsGroupPolicies.psd1" -OutFile LocalGroupPolicies.psd1
-Invoke-RestMethod -Method Get -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/local_group_policy/dsc_data/OfficeGroupPolicies.psd1" -OutFile LocalGroupPolicies.psd1
+# Download latest DSC configuration
+Invoke-RestMethod -URI "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/configurations/ClientBaseline.ps1" -OutFile ClientBaseline.ps1
+
+# Download all policies
+$localGroupPolicies = @()
+$policyDataFiles | ForEach-Object{
+    Invoke-RestMethod -URI $_ -OutFile tempfile.psd1
+    $localGroupPolicies += (Import-PowerShellDataFile -Path tempfile.psd1).Policies
+    Remove-Item tempfile.psd1
+}
 
 # Setup configuration data
 $ConfigurationData =
@@ -32,9 +47,7 @@ $ConfigurationData =
     @(
         @{
             NodeName           = "localhost"
-            LocalGroupPolicies = 
-                (Import-PowerShellDataFile -Path WindowsGroupPolicies.psd1).Policies + 
-                (Import-PowerShellDataFile -Path OfficeGroupPolicies.psd1).Policies
+            LocalGroupPolicies = $localGroupPolicies
         }
     )
 }

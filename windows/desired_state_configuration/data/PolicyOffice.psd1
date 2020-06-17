@@ -1,7 +1,8 @@
+#Note - some other Office settings are configured through the Windows Security Baseline.
 @{Policies = @(
     ################################ MACHINE SETTINGS ################################
     @{
-        Name         = 'Office > Updates: Enable automatic updates'
+        Name         = 'Office > Updates > Enable automatic updates'
         Ensure       = 'Present'
         PolicyType   = 'Machine'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\officeupdate\enableautomaticupdates'
@@ -12,7 +13,7 @@
 
     ################################# USER SETTINGS #################################
     @{
-        Name         = 'Office > First Run: Disable First Run Movie'
+        Name         = 'Office > First Run > Disable First Run Movie'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\firstrun\disablemovie'
@@ -20,7 +21,7 @@
         Data         = '1'
     }
     @{
-        Name         = 'Office > First Run: Disable Office First Run on application boot'
+        Name         = 'Office > First Run > Disable Office First Run on application boot'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\firstrun\bootedrtm'
@@ -28,7 +29,7 @@
         Data         = '1'
     }
     @{
-        Name         = 'Office > Global Options > Customize: Allow roaming of all user customizations'
+        Name         = 'Office > Global Options > Customize > Allow roaming of all user customizations'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\toolbars\customuiroaming'
@@ -36,7 +37,7 @@
         Data         = '1'
     }
     @{
-        Name         = 'Office > Language Preferences > Other: Disable coming soon'
+        Name         = 'Office > Language Preferences > Other > Disable coming soon'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\general\disablecomingsoon'
@@ -44,7 +45,7 @@
         Data         = '1'
     }
     @{
-        Name         = 'Office > Language Preferences > Editing Languages: Primary Editing Language Install'
+        Name         = 'Office > Language Preferences > Editing Languages > Primary Editing Language Install'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\languageresources\installlanguage'
@@ -52,7 +53,7 @@
         Data         = '2057'
     }
     @{
-        Name         = 'Office > Language Preferences > Editing Languages: Primary Editing Language Set'
+        Name         = 'Office > Language Preferences > Editing Languages > Primary Editing Language Set'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\languageresources\preferrededitinglanguage'
@@ -60,7 +61,7 @@
         Data         = 'en-GB'
     }
     @{
-        Name         = 'Office > Miscellaneous: Block signing into Office (Set to Microsoft Account only)'
+        Name         = 'Office > Miscellaneous > Block signing into Office' #Set to Microsoft Account only
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\signin\signinoptions'
@@ -68,7 +69,7 @@
         Data         = '1'
     }
     @{
-        Name         = 'Office > Miscellaneous: Suppress recommended settings dialog'
+        Name         = 'Office > Miscellaneous > Suppress recommended settings dialog'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\general\optindisable'
@@ -76,7 +77,7 @@
         Data         = '1'
     }
     @{
-        Name         = 'Office Privacy > Trust Center: Automatically receive small updates to improve reliability'
+        Name         = 'Office Privacy > Trust Center > Automatically receive small updates to improve reliability'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\updatereliabilitydata'
@@ -84,7 +85,7 @@
         Data         = '0'
     }
     @{
-        Name         = 'Office Privacy > Trust Center: Configure the level of client software diagnostic data sent by Office to Microsoft'
+        Name         = 'Office Privacy > Trust Center > Configure the level of client software diagnostic data sent by Office to Microsoft'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\common\clienttelemetry\sendtelemetry'
@@ -92,7 +93,7 @@
         Data         = '3'
     }
     @{
-        Name         = 'Office Privacy > Trust Center: Disable Opt-in Wizard on first run'
+        Name         = 'Office Privacy > Trust Center > Disable Opt-in Wizard on first run'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\general\shownfirstrunoptin'
@@ -100,7 +101,7 @@
         Data         = '1'
     }
     @{
-        Name         = 'Office Privacy > Trust Center: Enable Customer Experience Improvement Program'
+        Name         = 'Office Privacy > Trust Center > Enable Customer Experience Improvement Program'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\qmenable'
@@ -108,7 +109,7 @@
         Data         = '0'
     }
     @{
-        Name         = 'Office Privacy > Trust Center: Send Office Feedback'
+        Name         = 'Office Privacy > Trust Center > Send Office Feedback'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\feedback\enabled'
@@ -116,7 +117,7 @@
         Data         = '0'
     }
     @{
-        Name         = 'Office Privacy > Trust Center: Send personal information'
+        Name         = 'Office Privacy > Trust Center > Send personal information'
         Ensure       = 'Present'
         PolicyType   = 'User'
         KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\sendcustomerdata'
