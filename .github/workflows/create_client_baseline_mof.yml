@@ -28,3 +28,4 @@ jobs:
     - name: Run a multi-line script
       run: |
         ls
+        write-output "hello is this powershell?"
