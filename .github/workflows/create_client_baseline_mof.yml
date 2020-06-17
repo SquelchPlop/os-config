@@ -14,24 +14,16 @@ jobs:
 
     - name: Generate MOF
       run: |
-        
+        Set-Location .\windows\desired_state_configuration  
+
         # Make sure NuGet available
-        $nuget = Get-PackageProvider -Name NuGet -ListAvailable
-        if ((-not $nuget) -or ($nuget.version -lt 2.8.5.208 )) {
-            Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force -Confirm:$false
-        }
+        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force -Confirm:$false
 
         # Make sure PolicyFileEditor available
-        if (-not (Get-Module -ListAvailable –FullyQualifiedName @{ModuleName="PolicyFileEditor";ModuleVersion="3.0.1"})){
-            Install-Module -Name "PolicyFileEditor" -RequiredVersion 3.0.1 -Force 
-        }
+        Install-Module -Name "PolicyFileEditor" -RequiredVersion 3.0.1 -Force 
 
         # Make sure Test-PSRemoting available
-        if (-not (Get-Module -ListAvailable –FullyQualifiedName @{ModuleName="Test-PSRemoting";ModuleVersion="1.0.1"})){
-            Install-Module -Name "Test-PSRemoting" -RequiredVersion 1.0.1 -Force 
-        }
-      
-        Set-Location .\windows\desired_state_configuration
+        Install-Module -Name "Test-PSRemoting" -RequiredVersion 1.0.1 -Force 
 
         #Load all policies
         $localGroupPolicies = Get-ChildItem .\data\policies\ | ForEach-Object{
