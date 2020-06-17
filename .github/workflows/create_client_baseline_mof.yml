@@ -4,6 +4,8 @@ on:
   push:
     branches: 
       - master
+    tags:
+      - 'v*'
 
 jobs:
   create_mof:
@@ -15,9 +17,6 @@ jobs:
     - name: Generate MOF
       run: |
         Set-Location .\windows\desired_state_configuration  
-
-        # Make sure NuGet available
-        Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.208 -Force -Confirm:$false
 
         # Make sure PolicyFileEditor available
         Install-Module -Name "PolicyFileEditor" -RequiredVersion 3.0.1 -Force 
