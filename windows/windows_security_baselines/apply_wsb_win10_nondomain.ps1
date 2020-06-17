@@ -1,5 +1,5 @@
 $baseline = @{
-    url  = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Office365-ProPlus-Sept2019-FINAL.zip"
+    url  = "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Windows%2010%20Version%201909%20and%20Windows%20Server%20Version%201909%20Security%20Baseline.zip"
     hash = "85DD248E8F8A08C0DA3CD34AAC0DE494A9E27BB5B935B1706DBD410C54511A6F"
     name = "windows_10_1909_baseline"
 }
