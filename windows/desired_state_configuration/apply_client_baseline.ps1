@@ -1,10 +1,10 @@
 # Policies
 $policyDataFiles = @(
-    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyBitLocker.psd1",
-    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyMicrosoftDefender.psd1",
-    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyOffice.psd1",
-    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyWindows.psd1",
-    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/PolicyWindowsUpdate.psd1"
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/policies/BitLocker.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/policies/MicrosoftDefender.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/policies/Office.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/policies/Windows.psd1",
+    "https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/desired_state_configuration/data/policies/WindowsUpdate.psd1"
 )
 
 # Create dir
