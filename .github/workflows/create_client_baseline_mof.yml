@@ -4,8 +4,6 @@ on:
   push:
     branches: 
       - master
-    tags:
-      - 'v*'
 
 jobs:
   create_mof:
@@ -59,9 +57,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
+        tag_name: latest
+        release_name: Release latest
+        draft: true
         prerelease: false
 
     - name: Upload Release Asset
