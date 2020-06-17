@@ -10,8 +10,11 @@ if (-not (Get-Module -ListAvailable –FullyQualifiedName @{ModuleName="PSWindow
 }
 Import-Module PSWindowsUpdate
 
-# Add ServiceID for Windows Update
-Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -Confirm:$false
+# Add ServiceID for Microsoft Update if needed
+if (-not (Get-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d)){
+    Add-WUServiceManager -ServiceID 7971f918-a847-4430-9279-4a52d1efe18d -Confirm:$false
+    Start-Sleep 30
+}
 
 # Scanning against Microsoft for all Software Updates, and installing all, ignoring a reboot
 Get-WUInstall -MicrosoftUpdate -AcceptAll -IgnoreReboot

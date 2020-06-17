@@ -135,6 +135,30 @@
             Type         = 'DWord'
             Data         = '1'
         }
+        @{
+            Name         = 'Storage Sense: Enable'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\StorageSense\AllowStorageSenseGlobal'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = 'Storage Sense: Temporary Files cleanup'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\StorageSense\AllowStorageSenseTemporaryFilesCleanup'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = 'Storage Sense: Cadence (every 30 days)'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\StorageSense\ConfigStorageSenseGlobalCadence'
+            Type         = 'DWord'
+            Data         = '30'
+        }
 
         ############################## END MACHINE SETTINGS ##############################
 
