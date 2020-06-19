@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Generate MOF
-      run: ./windowsh/desired_state_configuration/scripts/generate_mofs.ps1
+      run: ./windows/desired_state_configuration/scripts/generate_mofs.ps1
 
     - name: Create Release
       id: create_release
