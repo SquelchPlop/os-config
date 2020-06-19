@@ -16,15 +16,17 @@ jobs:
       run: |
         Set-Location .\windows\desired_state_configuration  
 
-        # Make sure PolicyFileEditor available
-        Install-Module -Name "PolicyFileEditor" -RequiredVersion 3.0.1 -Force 
-
-        # Make sure Test-PSRemoting available
-        Install-Module -Name "Test-PSRemoting" -RequiredVersion 1.0.1 -Force 
+        #PreReq
+        ./install_required_modules.ps1
 
         #Load all policies
         $localGroupPolicies = Get-ChildItem .\data\policies\ | ForEach-Object{
             (Import-PowerShellDataFile -Path $_.FullName).Policies
+        }
+
+        #Load all remote files
+        $remoteFiles = Get-ChildItem .\data\remote_files\ | ForEach-Object{
+            (Import-PowerShellDataFile -Path $_.FullName).RemoteFiles
         }
 
         #Setup configuration data
@@ -35,6 +37,7 @@ jobs:
                 @{
                     NodeName           = "localhost"
                     LocalGroupPolicies = $localGroupPolicies
+                    RemoteFiles        = $remoteFiles
                 }
             )
         }
@@ -45,24 +48,29 @@ jobs:
         # Generate MOFs
         ClientBaseline -ConfigurationData $ConfigurationData -OutputPath ./mof/
 
-    - name: Upload MOF
-      uses: actions/upload-artifact@v2
-      with:
-        name: client_baseline_mof
-        path: ./windows/desired_state_configuration/mof/localhost.mof
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: latest
-        release_name: Release latest
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
         draft: true
         prerelease: false
 
-    - name: Upload Release Asset
+    - name: Upload Release Asset (Required Modules)
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+        asset_path: ./windows/desired_state_configuration/install_required_modules.ps1
+        asset_name: install_required_modules.ps1
+        asset_content_type: text/plain
+
+    - name: Upload Release Asset (MOF)
       id: upload-release-asset 
       uses: actions/upload-release-asset@v1
       env:
