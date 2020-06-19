@@ -1,15 +1,23 @@
 Configuration ClientBaseline {
     Import-DscResource -ModuleName 'PolicyFileEditor'
+    Import-DscResource -ModuleName 'PSDesiredStateConfiguration'
     Import-DscResource -ModuleName 'xPSDesiredStateConfiguration'
 
     Node $AllNodes.NodeName {
-        foreach ($LocalGroupPolicy in $Node.LocalGroupPolicies) {
-            cAdministrativeTemplateSetting $LocalGroupPolicy.Name {
-                Ensure       = $LocalGroupPolicy.Ensure
-                PolicyType   = $LocalGroupPolicy.PolicyType
-                KeyValueName = $LocalGroupPolicy.KeyValueName
-                Type         = $LocalGroupPolicy.Type
-                Data         = $LocalGroupPolicy.Data
+        foreach ($OptionalFeature in $Node.OptionalFeatures) {
+            WindowsOptionalFeature $OptionalFeature.Name {
+                Name   = $OptionalFeature.FeatureName
+                Ensure = $OptionalFeature.Ensure
+            }
+        }
+        
+        foreach ($Policy in $Node.Policies) {
+            cAdministrativeTemplateSetting $Policy.Name {
+                Ensure       = $Policy.Ensure
+                PolicyType   = $Policy.PolicyType
+                KeyValueName = $Policy.KeyValueName
+                Type         = $Policy.Type
+                Data         = $Policy.Data
             }
         }
 
@@ -19,5 +27,6 @@ Configuration ClientBaseline {
                 DestinationPath = $RemoteFile.DestinationPath
             }
         }
+
     }
 }
