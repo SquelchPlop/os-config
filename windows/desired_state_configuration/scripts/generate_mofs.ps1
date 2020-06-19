@@ -1,11 +1,6 @@
 #PreReq
 & $PSScriptRoot\install_required_modules.ps1
-
-#Load all optional features
-$OptionalFeatures = Get-ChildItem $PSScriptRoot\..\data\optional_features\ | ForEach-Object {
-    (Import-PowerShellDataFile -Path $_.FullName).OptionalFeatures
-}
-        
+       
 #Load all policies
 $Policies = Get-ChildItem $PSScriptRoot\..\data\policies\ | ForEach-Object {
     (Import-PowerShellDataFile -Path $_.FullName).Policies
@@ -23,7 +18,6 @@ $ConfigurationData =
     @(
         @{
             NodeName         = "localhost"
-            OptionalFeatures = $OptionalFeatures
             Policies         = $Policies
             RemoteFiles      = $RemoteFiles
         }
