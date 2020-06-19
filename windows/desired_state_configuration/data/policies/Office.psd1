@@ -13,6 +13,14 @@
 
         ################################# USER SETTINGS #################################
         @{
+            Name         = 'Excel > Excel Options > Save > Default file format'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\excel\options\defaultformat'
+            Type         = 'DWord'
+            Data         = '1' #Excel Workbook (*.xlsx)
+        }
+        @{
             Name         = 'Office > First Run > Disable First Run Movie'
             Ensure       = 'Present'
             PolicyType   = 'User'
@@ -61,12 +69,28 @@
             Data         = 'en-GB'
         }
         @{
+            Name         = 'Office > Microsoft Save As PDF and XPS add-ins > Disable Microsoft Save As PDF and XPS add-ins'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\fixedformat'
+            Type         = 'DWord'
+            Data         = '1' #Disable XPS
+        }
+        @{
             Name         = 'Office > Miscellaneous > Block signing into Office' #Set to Microsoft Account only
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\signin\signinoptions'
             Type         = 'DWord'
             Data         = '1'
+        }
+        @{
+            Name         = 'Office > Miscellaneous > Hide file locations when opening or saving files'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\internet\onlinestorage'
+            Type         = 'DWord'
+            Data         = '4' #Hide Local PC
         }
         @{
             Name         = 'Office > Miscellaneous > Suppress recommended settings dialog'
@@ -77,7 +101,23 @@
             Data         = '1'
         }
         @{
-            Name         = 'Office Privacy > Trust Center > Automatically receive small updates to improve reliability'
+            Name         = 'Office > Miscellaneous > Show the option for Office Insider'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\insiderslabbehavior'
+            Type         = 'DWord'
+            Data         = '2'
+        }
+        @{
+            Name         = 'Office > Miscellaneous > Show LinkedIn features in Office applications'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\linkedin'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
+            Name         = 'Office > Privacy > Trust Center > Automatically receive small updates to improve reliability'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\updatereliabilitydata'
@@ -85,7 +125,7 @@
             Data         = '0'
         }
         @{
-            Name         = 'Office Privacy > Trust Center > Configure the level of client software diagnostic data sent by Office to Microsoft'
+            Name         = 'Office > Privacy > Trust Center > Configure the level of client software diagnostic data sent by Office to Microsoft'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\common\clienttelemetry\sendtelemetry'
@@ -93,7 +133,7 @@
             Data         = '3'
         }
         @{
-            Name         = 'Office Privacy > Trust Center > Disable Opt-in Wizard on first run'
+            Name         = 'Office > Privacy > Trust Center > Disable Opt-in Wizard on first run'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\general\shownfirstrunoptin'
@@ -101,7 +141,7 @@
             Data         = '1'
         }
         @{
-            Name         = 'Office Privacy > Trust Center > Enable Customer Experience Improvement Program'
+            Name         = 'Office > Privacy > Trust Center > Enable Customer Experience Improvement Program'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\qmenable'
@@ -109,7 +149,7 @@
             Data         = '0'
         }
         @{
-            Name         = 'Office Privacy > Trust Center > Send Office Feedback'
+            Name         = 'Office > Privacy > Trust Center > Send Office Feedback'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\feedback\enabled'
@@ -117,12 +157,68 @@
             Data         = '0'
         }
         @{
-            Name         = 'Office Privacy > Trust Center > Send personal information'
+            Name         = 'Office > Privacy > Trust Center > Send personal information'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\sendcustomerdata'
             Type         = 'DWord'
             Data         = '0'
+        }
+        @{
+            Name         = "Office > What's New > Don't show the What's New information for Excel"
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\excel\dontshowwhatsnew'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = "Office > What's New > Don't show the What's New information for OneNote"
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\onenote\dontshowwhatsnew'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = "Office > What's New > Don't show the What's New information for Outlook"
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\outlook\dontshowwhatsnew'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = "Office > What's New > Don't show the What's New information for PowerPoint"
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\powerpoint\dontshowwhatsnew'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = "Office > What's New > Don't show the What's New information for Word"
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\word\dontshowwhatsnew'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = 'PowerPoint > PowerPoint Options > Save > Default file format'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\powerpoint\options\defaultformat'
+            Type         = 'DWord'
+            Data         = '27' #PowerPoint Presentation (*.pptx)
+        }
+        @{
+            Name         = 'Word > Word Options > Save > Default file format'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\word\options\defaultformat'
+            Type         = 'String'
+            Data         = '' #Word Document (*.docx) 
         }
         ############################### END USER SETTINGS ###############################
     )
