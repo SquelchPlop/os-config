@@ -12,7 +12,7 @@ $Policies = Get-ChildItem $PSScriptRoot\..\data\policies\ | ForEach-Object {
 }
 
 #Load all remote files
-$remoteFiles = Get-ChildItem $PSScriptRoot\..\data\remote_files\ | ForEach-Object {
+$RemoteFiles = Get-ChildItem $PSScriptRoot\..\data\remote_files\ | ForEach-Object {
     (Import-PowerShellDataFile -Path $_.FullName).RemoteFiles
 }
 
@@ -25,7 +25,7 @@ $ConfigurationData =
             NodeName         = "localhost"
             OptionalFeatures = $OptionalFeatures
             Policies         = $Policies
-            RemoteFiles      = $remoteFiles
+            RemoteFiles      = $RemoteFiles
         }
     )
 }
