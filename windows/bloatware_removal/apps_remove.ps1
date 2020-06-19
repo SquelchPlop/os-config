@@ -10,7 +10,6 @@ Microsoft.ZuneMusic
 Microsoft.MicrosoftSolitaireCollection
 Microsoft.MixedReality.Portal
 Microsoft.MicrosoftOfficeHub
-microsoft.onenoteim
 Microsoft.Getstarted" | Out-File appsToRemove.txt
 
 # Remove UWP apps
