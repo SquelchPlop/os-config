@@ -14,7 +14,7 @@
             PolicyType   = 'Machine'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\Explorer\StartLayoutFile'
             Type         = 'String'
-            Data         = '%PROGRAMDATA%\layout_modification.xml'
+            Data         = 'C:\ProgramData\layout_modification.xml'
         }
         ############################## END MACHINE SETTINGS ##############################
     )
