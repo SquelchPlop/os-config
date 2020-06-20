@@ -7,9 +7,9 @@
   <DefaultLayoutOverride LayoutCustomizationRestrictionType="OnlySpecifiedGroups">
     <StartLayoutCollection>
       <defaultlayout:StartLayout GroupCellWidth="6">
-        <start:Group Name="Productivity">
+        <start:Group Name="Office">
           <start:DesktopApplicationTile Size="2x2" Column="0" Row="0" DesktopApplicationID="Microsoft.Office.EXCEL.EXE.15" />          
-          <start:DesktopApplicationTile Size="2x2" Column="2" Row="0" DesktopApplicationID="Microsoft.Office.ONENOTE.EXE.15" />
+          <start:Tile Size="2x2" Column="2" Row="0" AppUserModelID="Microsoft.Office.OneNote_8wekyb3d8bbwe!microsoft.onenoteim" />
           <start:DesktopApplicationTile Size="2x2" Column="4" Row="0" DesktopApplicationID="Microsoft.Office.OUTLOOK.EXE.15" />
 
           <start:DesktopApplicationTile Size="2x2" Column="0" Row="2" DesktopApplicationID="Microsoft.Office.POWERPNT.EXE.15" />          
