@@ -18,8 +18,8 @@
         </start:Group>
         <start:Group Name="Core">
           <start:DesktopApplicationTile Size="2x2" Column="0" Row="0" DesktopApplicationID="Microsoft.Windows.Explorer" />
-          <start:DesktopApplicationTile Size="2x2" Column="2" Row="0" DesktopApplicationID="MSEdge" />
-          <start:Tile Size="2x2" Column="4" Row="0" AppUserModelID="Microsoft.ScreenSketch_8wekyb3d8bbwe!App" />
+          <start:DesktopApplicationTile Size="2x2" Column="0" Row="2" DesktopApplicationID="MSEdge" />
+          <start:Tile Size="4x4" Column="2" Row="0" AppUserModelID="Microsoft.BingWeather_8wekyb3d8bbwe!App" />
         </start:Group>
       </defaultlayout:StartLayout>
     </StartLayoutCollection>
