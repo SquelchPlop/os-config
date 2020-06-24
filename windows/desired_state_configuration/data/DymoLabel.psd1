@@ -11,7 +11,7 @@
         }
     )
     
-    Shortcuts        = @(
+    Shortcuts          = @(
         @{
             Name      = "Dymo Label Start Menu Shortcut"
             Ensure    = "Present"
@@ -21,7 +21,7 @@
         }
     )
     
-    Files            = @(
+    Files              = @(
         @{
             Name            = "Dymo Label Start Menu Shortcuts Directory"
             Ensure          = "Absent"
@@ -30,6 +30,14 @@
             Force           = $true
             Recurse         = $true
             Type            = "Directory"
+        }
+        @{
+            Name            = "Dymo Label All Users Desktop Shortcut"
+            Ensure          = "Absent"
+            DependsOn       = "[cChocoPackageInstaller]Dymo Label"
+            DestinationPath = "C:\Users\Public\Desktop\DYMO Label v.8.lnk"
+            Force           = $true
+            Type            = "File"
         }
         @{
             Name            = "Dymo Label Configuration XML file"

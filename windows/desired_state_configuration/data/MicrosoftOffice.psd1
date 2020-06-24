@@ -14,6 +14,15 @@
 
     Files              = @(
         @{
+            Name            = "Microsoft Office Tools Start Menu Shortcuts Directory"
+            Ensure          = "Absent"
+            DependsOn       = "[cChocoPackageInstaller]Microsoft Office Click-to-Run"
+            DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Microsoft Office Tools\"
+            Force           = $true
+            Recurse         = $true
+            Type            = "Directory"
+        }    
+        @{
             Name            = "Office Configuration XML file"
             Ensure          = "Present"
             DestinationPath = "C:\ProgramData\office_configuration.xml"
