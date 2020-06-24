@@ -1,28 +1,21 @@
 #PreReq
 & $PSScriptRoot\install_required_modules.ps1
-       
-#Load all policies
-$Policies = Get-ChildItem $PSScriptRoot\..\data\policies\ | ForEach-Object {
-    (Import-PowerShellDataFile -Path $_.FullName).Policies
+
+#Capture configuration data from all .psd1 files
+$loadedConfig = @{}
+
+$dataFileNames = (Get-ChildItem "$PSScriptRoot\..\data\*.psd1").FullName
+
+foreach ($dataFile in $dataFileNames) {
+    $newData = Import-PowerShellDataFile -path $dataFile #Load each data file
+    
+    foreach ($type in $newData.Keys) {
+        $loadedConfig[$type] += $newData.item($type) #For each type in the data file (Policies, Packages etc), append it to our list for each type
+    }
 }
 
-#Load all remote files
-$RemoteFiles = Get-ChildItem $PSScriptRoot\..\data\remote_files\ | ForEach-Object {
-    (Import-PowerShellDataFile -Path $_.FullName).RemoteFiles
-}
-
-#Setup configuration data
-$ConfigurationData =
-@{
-    AllNodes =
-    @(
-        @{
-            NodeName         = "localhost"
-            Policies         = $Policies
-            RemoteFiles      = $RemoteFiles
-        }
-    )
-}
+#Setup configuration data structure, and add the loaded configuration data
+$ConfigurationData = @{AllNodes = @( @{NodeName = "localhost" } + $loadedConfig ) }
 
 # Dot source the client configuration
 . $PSScriptRoot\..\configurations\ClientBaseline.ps1

@@ -17,6 +17,14 @@ $modules = @(
         Name    = "xPSDesiredStateConfiguration"
         Version = "9.1.0"
     }
+    @{
+        Name    = "cChoco"
+        Version = "2.4.1.0"
+    }
+    @{
+        Name    = "DSCR_Shortcut"
+        Version = "1.3.8"
+    }
 )
 
 $packageProviders | foreach-Object {

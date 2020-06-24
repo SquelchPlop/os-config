@@ -1,5 +1,6 @@
 #Note - some other Defender settings are configured through the Windows Security Baseline.
-@{Policies = @(
+@{
+    Policies = @(
         ################################ MACHINE SETTINGS ################################
         @{
             Name         = 'Windows > Windows Components > Microsoft Defender Antivirus > MAPS > Join Microsoft MAPS'

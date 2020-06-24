@@ -1,5 +1,76 @@
-#Note - some other Office settings are configured through the Windows Security Baseline.
-@{Policies = @(
+@{
+    ChocolateyPackages = @(
+        @{
+            Name           = "Microsoft Office Click-to-Run"
+            Ensure         = "present"
+            DependsOn      = "[cChocoInstaller]installChoco", "[File]Office Configuration XML file"
+            PackageName    = "microsoft-office-click-to-run"
+            params         = "/configuration-xml-file:C:\ProgramData\office_configuration.xml"
+            MinimumVersion = "1.0.0"
+            Source         = "https://pkgs.dev.azure.com/SquelchPlop/choco-public/_packaging/choco-public/nuget/v2/"
+            AutoUpgrade    = $True
+        }
+    )
+
+    Files              = @(
+        @{
+            Name            = "Office Configuration XML file"
+            Ensure          = "Present"
+            DestinationPath = "C:\ProgramData\office_configuration.xml"
+            Force           = $true
+            Type            = "File" 
+            Contents        = @"
+<Configuration ID="e2aa76b3-370c-45aa-8763-5cc3d12457fb">
+<Add OfficeClientEdition="64" Channel="Current" AllowCdnFallback="True">
+<Product ID="O365ProPlusRetail" PIDKEY="NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP">
+<Language ID="MatchOS" />
+<ExcludeApp ID="Access" />
+<ExcludeApp ID="Groove" />
+<ExcludeApp ID="Lync" />
+<ExcludeApp ID="OneDrive" />
+<ExcludeApp ID="OneNote" />
+<ExcludeApp ID="Teams" />
+</Product>
+</Add>
+<Property Name="PinIconsToTaskbar" Value="FALSE" />
+<Property Name="AUTOACTIVATE" Value="1" />
+<Property Name="FORCEAPPSHUTDOWN" Value="FALSE" />
+<Updates Enabled="TRUE" />
+<Display Level="None" AcceptEULA="TRUE" />  
+<RemoveMSI />
+<AppSettings>
+<User Key="software\microsoft\office\16.0\common\toolbars" Name="customuiroaming" Value="1" Type="REG_DWORD" App="office16" Id="L_AllowRoamingQuickAccessToolBarRibbonCustomizations" />
+<User Key="software\microsoft\office\16.0\common" Name="sendcustomerdata" Value="0" Type="REG_DWORD" App="office16" Id="L_Sendcustomerdata" />
+<User Key="software\microsoft\office\16.0\common\general" Name="shownfirstrunoptin" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableOptinWizard" />
+<User Key="software\microsoft\office\16.0\common" Name="qmenable" Value="0" Type="REG_DWORD" App="office16" Id="L_EnableCustomerExperienceImprovementProgram" />
+<User Key="software\microsoft\office\16.0\common" Name="updatereliabilitydata" Value="0" Type="REG_DWORD" App="office16" Id="L_UpdateReliabilityPolicy" />
+<User Key="software\microsoft\office\16.0\common\languageresources" Name="installlanguage" Value="2057" Type="REG_DWORD" App="office16" Id="L_PrimaryEditingLanguage" />
+<User Key="software\microsoft\office\16.0\common\fixedformat" Name="disablepublishtofixedformat" Value="1" Type="REG_DWORD" App="office16" Id="L_Specifytypesoffixedformatoptionsavailabletotheuser" />
+<User Key="software\microsoft\office\16.0\common\general" Name="optindisable" Value="1" Type="REG_DWORD" App="office16" Id="L_SuppressRecommendedSettingsDialog" />
+<User Key="software\microsoft\office\16.0\common\feedback" Name="enabled" Value="0" Type="REG_DWORD" App="office16" Id="L_SendFeedback" />
+<User Key="software\microsoft\office\16.0\common\signin" Name="signinoptions" Value="1" Type="REG_DWORD" App="office16" Id="L_SignInOptions" />
+<User Key="software\microsoft\office\16.0\firstrun" Name="disablemovie" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableMovie" />
+<User Key="software\microsoft\office\16.0\firstrun" Name="bootedrtm" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableOfficeFirstrun" />
+<User Key="software\microsoft\office\16.0\common\internet" Name="onlinestorage" Value="4" Type="REG_DWORD" App="office16" Id="L_OnlineStorageFilter" />
+<User Key="software\microsoft\office\16.0\excel" Name="dontshowwhatsnew" Value="1" Type="REG_DWORD" App="office16" Id="L_DontShowWhatsNewInformationExcel" />
+<User Key="software\microsoft\office\16.0\powerpoint" Name="dontshowwhatsnew" Value="1" Type="REG_DWORD" App="office16" Id="L_DontShowWhatsNewInformationPowerPoint" />
+<User Key="software\microsoft\office\16.0\outlook" Name="dontshowwhatsnew" Value="1" Type="REG_DWORD" App="office16" Id="L_DontShowWhatsNewInformationOutlook" />
+<User Key="software\microsoft\office\16.0\onenote" Name="dontshowwhatsnew" Value="1" Type="REG_DWORD" App="office16" Id="L_DontShowWhatsNewInformationOneNote" />
+<User Key="software\microsoft\office\16.0\word" Name="dontshowwhatsnew" Value="1" Type="REG_DWORD" App="office16" Id="L_DontShowWhatsNewInformationWord" />
+<User Key="software\microsoft\office\16.0\common" Name="linkedin" Value="0" Type="REG_DWORD" App="office16" Id="L_AllowLinkedInFeatures" />
+<User Key="software\microsoft\office\16.0\common\general" Name="disablecomingsoon" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableComingSoon" />
+<User Key="software\microsoft\office\16.0\common" Name="insiderslabbehavior" Value="2" Type="REG_DWORD" App="office16" Id="L_OfficeInsiderUserExperience" />
+<User Key="software\microsoft\office\16.0\excel\options" Name="defaultformat" Value="51" Type="REG_DWORD" App="excel16" Id="L_SaveExcelfilesas" />
+<User Key="software\microsoft\office\16.0\powerpoint\options" Name="defaultformat" Value="27" Type="REG_DWORD" App="ppt16" Id="L_SavePowerPointfilesas" />
+<User Key="software\microsoft\office\16.0\word\options" Name="defaultformat" Value="" Type="REG_SZ" App="word16" Id="L_SaveWordfilesas" />
+</AppSettings>
+</Configuration>
+"@
+        }
+    )
+
+    #Note - some other Office settings are configured through the Windows Security Baseline.
+    Policies           = @(
         ################################ MACHINE SETTINGS ################################
         @{
             Name         = 'Office > Updates > Enable automatic updates'

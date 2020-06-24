@@ -1,4 +1,5 @@
-@{Policies = @(
+@{
+    Policies = @(
         ################################ MACHINE SETTINGS ################################
         @{
             Name         = 'Remove "Switch User", "Ease of Access" and "Language" from home/lock screens' #Not a policy

@@ -1,4 +1,5 @@
-@{Policies = @(
+@{
+    Policies = @(
         ################################ MACHINE SETTINGS ################################
         @{
             Name         = 'Show a notification when your PC requires a restart to finish updating' #Not a policy

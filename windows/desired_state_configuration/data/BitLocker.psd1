@@ -1,5 +1,6 @@
 #Note - some other BitLocker settings are configured through the Windows Security Baseline.
-@{Policies = @(
+@{
+    Policies = @(
         ################################ MACHINE SETTINGS ################################
         @{
             Name         = 'Windows > Windows Components > BitLocker Drive Encryption > Operating System Drives > Disallow standard users from changing the PIN or password'
