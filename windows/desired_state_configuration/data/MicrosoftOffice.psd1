@@ -30,7 +30,7 @@
             Type            = "File" 
             Contents        = @"
 <Configuration ID="e2aa76b3-370c-45aa-8763-5cc3d12457fb">
-<Add OfficeClientEdition="64" Channel="Current" AllowCdnFallback="True">
+<Add OfficeClientEdition="64" Channel="Monthly" AllowCdnFallback="True">
 <Product ID="O365ProPlusRetail" PIDKEY="NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP">
 <Language ID="MatchOS" />
 <ExcludeApp ID="Access" />
@@ -45,7 +45,8 @@
 <Property Name="AUTOACTIVATE" Value="1" />
 <Property Name="FORCEAPPSHUTDOWN" Value="FALSE" />
 <Updates Enabled="TRUE" />
-<Display Level="None" AcceptEULA="TRUE" />  
+<Display Level="None" AcceptEULA="TRUE" />
+<Logging Level="Standard" Path="C:\Windows\Temp\OfficeDeploymentTool.log" />
 <RemoveMSI />
 <AppSettings>
 <User Key="software\microsoft\office\16.0\common\toolbars" Name="customuiroaming" Value="1" Type="REG_DWORD" App="office16" Id="L_AllowRoamingQuickAccessToolBarRibbonCustomizations" />
