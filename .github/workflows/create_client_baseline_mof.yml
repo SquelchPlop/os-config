@@ -31,11 +31,15 @@ jobs:
     if: github.ref == 'refs/heads/master'
 
     steps:
+    - uses: actions/checkout@master # Repo needs to be cloned, so that bump version works (needs to look at tags)
+      with:
+        fetch-depth: '0'
+
     - name: Download built artifacts # Downloads the artifacts uploaded in the previous job
       uses: actions/download-artifact@v1
       with:
         name: mof_and_requirements_artifact # Downloads the files in the artifact "mof_and_requirements_artifact"
-        path: ./ # Sets the parh to the current working dir.  Default is a directory set to the name of the artifact
+        path: ./artifact/ # Sets the path under the current working dir
 
     - name: Bump version and push tag # step ID is "bump-version" by default
       uses: anothrNick/github-tag-action@master
@@ -63,7 +67,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: install_required_modules.ps1
+        asset_path: ./artifact/install_required_modules.ps1
         asset_name: install_required_modules.ps1
         asset_content_type: text/plain
 
@@ -73,6 +77,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: localhost.mof
+        asset_path: ./artifact/localhost.mof
         asset_name: client_baseline.mof
         asset_content_type: text/plain
