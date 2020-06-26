@@ -41,7 +41,8 @@ jobs:
         name: mof_and_requirements_artifact # Downloads the files in the artifact "mof_and_requirements_artifact"
         path: ./artifact/ # Sets the path under the current working dir
 
-    - name: Bump version and push tag # step ID is "bump-version" by default
+    - name: Bump version and push tag
+      id: bump_version
       uses: anothrNick/github-tag-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
