@@ -1,25 +1,39 @@
-Set-Location $env:temp
+$ToRemove = @(
+    "Microsoft.Microsoft3DViewer"
+    "Microsoft.549981C3F5F10"
+    "Microsoft.WindowsFeedbackHub"
+    "Microsoft.ZuneVideo"
+    "Microsoft.GetHelp"
+    "Microsoft.ZuneMusic"
+    "Microsoft.MicrosoftSolitaireCollection"
+    "Microsoft.MixedReality.Portal"
+    "Microsoft.MicrosoftOfficeHub"
+    "Microsoft.Getstarted"
+)
 
-# Apps to remove into text file
-"Microsoft.Microsoft3DViewer
-Microsoft.549981C3F5F10
-Microsoft.WindowsFeedbackHub
-Microsoft.ZuneVideo
-Microsoft.GetHelp
-Microsoft.ZuneMusic
-Microsoft.MicrosoftSolitaireCollection
-Microsoft.MixedReality.Portal
-Microsoft.MicrosoftOfficeHub
-Microsoft.Getstarted" | Out-File appsToRemove.txt
+foreach ($App in $ToRemove) {
+    $PackageFullName = (Get-AppxPackage $App).PackageFullName
+    $ProvisionedPackageFullName = (Get-AppxProvisionedPackage -Online | Where-Object {$_.Displayname -eq $App}).PackageName
 
-# Remove UWP apps
-Invoke-RestMethod -URI https://raw.githubusercontent.com/Digressive/Remove-Win10-Apps/master/Remove-Win10-Apps.ps1 -OutFile Remove-Win10-Apps.ps1
+    If ($PackageFullName)
+    {
+        Write-Output -Type Info -Event "Removing Package: $App"
+        Remove-AppxPackage -AllUsers -Package $PackageFullName | Out-Null
+    }
 
-# Perform removal
-./Remove-Win10-Apps.ps1 -List ./appsToRemove.txt -L ./
+    else {
+        Write-Output -Type Info -Event "Unable to find package: $App"
+    }
 
-# Cleanup
-Remove-Item appsToRemove.txt -Force
-Remove-Item Remove-Win10-Apps.ps1 -Force
+    If ($ProvisionedPackageFullName)
+    {
+        Write-Output -Type Info -Event "Removing Provisioned Package: $ProPackageFullName"
+        Remove-AppxProvisionedPackage -Online -PackageName $ProPackageFullName | Out-Null
+    }
+
+    else {
+        Write-Output -Type Info -Event "Unable to find provisioned package: $App"
+    }
+}
 
 Write-Output "Removed apps"
