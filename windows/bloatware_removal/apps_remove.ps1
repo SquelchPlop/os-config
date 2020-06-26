@@ -17,7 +17,7 @@ foreach ($App in $ToRemove) {
 
     If ($PackageFullName)
     {
-        Write-Output -Type Info -Event "Removing Package: $App"
+        Write-Output -Type Info -Event "Removing Package: $PackageFullName"
         Remove-AppxPackage -AllUsers -Package $PackageFullName | Out-Null
     }
 
@@ -27,8 +27,8 @@ foreach ($App in $ToRemove) {
 
     If ($ProvisionedPackageFullName)
     {
-        Write-Output -Type Info -Event "Removing Provisioned Package: $ProPackageFullName"
-        Remove-AppxProvisionedPackage -Online -PackageName $ProPackageFullName | Out-Null
+        Write-Output -Type Info -Event "Removing Provisioned Package: $ProvisionedPackageFullName"
+        Remove-AppxProvisionedPackage -Online -PackageName $ProvisionedPackageFullName | Out-Null
     }
 
     else {
