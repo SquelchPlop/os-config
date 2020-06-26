@@ -5,8 +5,8 @@
             Ensure         = "present"
             DependsOn      = "[cChocoInstaller]installChoco", "[File]Office Configuration XML file"
             PackageName    = "microsoft-office-click-to-run"
-            params         = "/configuration-xml-file:C:\ProgramData\office_configuration.xml"
-            MinimumVersion = "1.0.0"
+            params         = "/configuration-xml-file:C:\ProgramData\office_configuration.xml /kms:2019"
+            MinimumVersion = "1.0.1"
             Source         = "https://pkgs.dev.azure.com/SquelchPlop/choco-public/_packaging/choco-public/nuget/v2/"
             AutoUpgrade    = $True
         }
@@ -31,7 +31,7 @@
             Contents        = @"
 <Configuration ID="e2aa76b3-370c-45aa-8763-5cc3d12457fb">
 <Add OfficeClientEdition="64" Channel="Current" AllowCdnFallback="True">
-<Product ID="O365ProPlusRetail" PIDKEY="XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99">
+<Product ID="O365ProPlusRetail">
 <Language ID="MatchOS" />
 <ExcludeApp ID="Access" />
 <ExcludeApp ID="Groove" />
