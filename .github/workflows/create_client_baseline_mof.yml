@@ -2,28 +2,45 @@ name: Create Windows client baseline DSC
 
 on:
   push:
-    branches: 
-      - master
     paths:
       - 'windows/desired_state_configuration/**'
 
 jobs:
-  create_mof:
+  build_mof_and_requirements:
     runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        REPO_OWNER: SquelchPlop
-
     - name: Generate MOF
       run: ./windows/desired_state_configuration/scripts/generate_mofs.ps1
 
-    - name: Create Release
+    - uses: actions/upload-artifact@v2
+      with:
+        path: ./mof/localhost.mof
+
+    - uses: actions/upload-artifact@v2
+      with:
+        path: ./windows/desired_state_configuration/scripts/install_required_modules.ps1
+
+  create_release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - name: Download built artifacts # Downloads the artifacts uploaded in the previous job
+      uses: actions/download-artifact@v1
+
+    - name: Bump version and push tag # step ID is "bump-version" by default
+      uses: anothrNick/github-tag-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch
+        WITH_V: true
+        RELEASE_BRANCHES: master
+        INITIAL_VERSION: 0.0.0
+
+    - name: Create release
       id: create_release
       uses: actions/create-release@v1
       env:
@@ -40,7 +57,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./windows/desired_state_configuration/scripts/install_required_modules.ps1
+        asset_path: install_required_modules.ps1
         asset_name: install_required_modules.ps1
         asset_content_type: text/plain
 
@@ -50,6 +67,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./mof/localhost.mof
+        asset_path: localhost.mof
         asset_name: client_baseline.mof
         asset_content_type: text/plain
