@@ -17,10 +17,12 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
+        name: mof_and_requirements_artifact
         path: ./mof/localhost.mof
 
     - uses: actions/upload-artifact@v2
       with:
+        name: mof_and_requirements_artifact
         path: ./windows/desired_state_configuration/scripts/install_required_modules.ps1
 
   create_release:
@@ -31,6 +33,9 @@ jobs:
     steps:
     - name: Download built artifacts # Downloads the artifacts uploaded in the previous job
       uses: actions/download-artifact@v1
+      with:
+        name: mof_and_requirements_artifact # Downloads the files in the artifact "mof_and_requirements_artifact"
+        path: ./ # Sets the parh to the current working dir.  Default is a directory set to the name of the artifact
 
     - name: Bump version and push tag # step ID is "bump-version" by default
       uses: anothrNick/github-tag-action@master
