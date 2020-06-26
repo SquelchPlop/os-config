@@ -27,11 +27,11 @@
             Ensure          = "Present"
             DestinationPath = "C:\ProgramData\office_configuration.xml"
             Force           = $true
-            Type            = "File" 
+            Type            = "File"
             Contents        = @"
 <Configuration ID="e2aa76b3-370c-45aa-8763-5cc3d12457fb">
-<Add OfficeClientEdition="64" Channel="Monthly" AllowCdnFallback="True">
-<Product ID="O365ProPlusRetail" PIDKEY="NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP">
+<Add OfficeClientEdition="64" Channel="Current" AllowCdnFallback="True">
+<Product ID="O365ProPlusRetail" PIDKEY="XQNVK-8JYDB-WJ9W3-YJ8YR-WFG99">
 <Language ID="MatchOS" />
 <ExcludeApp ID="Access" />
 <ExcludeApp ID="Groove" />

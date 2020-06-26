@@ -24,7 +24,7 @@
         @{
             Name            = "Start menu and taskbar layout modification XML file"
             Ensure          = "Present"
-            DestinationPath = "C:\ProgramData\layout_modification2.xml"
+            DestinationPath = "C:\ProgramData\layout_modification.xml"
             Force           = $true
             Type            = "File"
             Contents        = @"
