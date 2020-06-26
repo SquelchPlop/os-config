@@ -11,21 +11,20 @@
         }
     )
     
-    Shortcuts          = @(
-        @{
-            Name      = "Dymo Label Start Menu Shortcut"
-            Ensure    = "Present"
-            DependsOn = "[cChocoPackageInstaller]Dymo Label"
-            Target    = "C:\Program Files (x86)\DYMO\DYMO Label Software\DLS.exe"
-            Path      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DYMO Label.lnk"
-        }
-    )
-    
     Files              = @(
+        @{
+            Name            = "Dymo Label Start Menu Shortcut"
+            Ensure          = "Present"
+            DependsOn       = "[cChocoPackageInstaller]Dymo Label"
+            DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DYMO Label.lnk"
+            SourcePath      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DYMO Label\DYMO Label v.8.lnk"
+            Force           = $true
+            Type            = "File"
+        }
         @{
             Name            = "Dymo Label Start Menu Shortcuts Directory"
             Ensure          = "Absent"
-            DependsOn       = "[cChocoPackageInstaller]Dymo Label"
+            DependsOn       = "[File]Dymo Label Start Menu Shortcut"
             DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\DYMO Label\"
             Force           = $true
             Recurse         = $true

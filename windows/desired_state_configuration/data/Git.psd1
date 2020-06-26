@@ -11,23 +11,20 @@
         }
     )
 
-    Shortcuts          = @(
-        @{
-            Name             = "Git Bash Start Menu Shortcut"
-            Ensure           = "Present"
-            DependsOn        = "[cChocoPackageInstaller]Git for Windows"
-            Target           = "C:\Program Files\Git\git-bash.exe"
-            Path             = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git Bash.lnk"
-            Arguments        = "--cd-to-home"
-            WorkingDirectory = "%HOMEDRIVE%%HOMEPATH%"
-        }
-    )
-
     Files              = @(
+        @{
+            Name            = "Git Bash Start Menu Shortcut"
+            Ensure          = "Present"
+            DependsOn       = "[cChocoPackageInstaller]Git for Windows"
+            DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git Bash.lnk"
+            SourcePath      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git\Git Bash.lnk"
+            Force           = $true
+            Type            = "File"
+        }
         @{
             Name            = "Git Start Menu Shortcuts Directory"
             Ensure          = "Absent"
-            DependsOn       = "[cChocoPackageInstaller]Git for Windows"
+            DependsOn       = "[File]Git Bash Start Menu Shortcut"
             DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Git\"
             Force           = $true
             Recurse         = $true

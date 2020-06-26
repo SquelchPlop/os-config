@@ -17,6 +17,22 @@
             Type         = 'String'
             Data         = 'C:\ProgramData\layout_modification.xml'
         }
+        @{
+            Name         = 'Remove Cortana from the Taskbar' #Not a policy
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowCortanaButton'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
+            Name         = 'Remove Task View from the Taskbar' #Not a policy
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowTaskViewButton'
+            Type         = 'DWord'
+            Data         = '0'
+        }
         ############################## END MACHINE SETTINGS ##############################
     )
 

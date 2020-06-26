@@ -11,21 +11,20 @@
         }
     )
 
-    Shortcuts          = @(
-        @{
-            Name      = "Plex Start Menu Shortcut"
-            Ensure    = "Present"
-            DependsOn = "[cChocoPackageInstaller]Plex"
-            Target    = "C:\Program Files\Plex\Plex\Plex.exe"
-            Path      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Plex.lnk"
-        }
-    )
-    
     Files              = @(
+        @{
+            Name            = "Plex Start Menu Shortcut"
+            Ensure          = "Present"
+            DependsOn       = "[cChocoPackageInstaller]Plex"
+            DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Plex.lnk"
+            SourcePath      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Plex\Plex.lnk"
+            Force           = $true
+            Type            = "File"
+        }
         @{
             Name            = "Plex Start Menu Shortcuts Directory"
             Ensure          = "Absent"
-            DependsOn       = "[cChocoPackageInstaller]Plex"
+            DependsOn       = "[File]Plex Start Menu Shortcut"
             DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Plex\"
             Force           = $true
             Recurse         = $true

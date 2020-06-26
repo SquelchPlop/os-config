@@ -10,22 +10,21 @@
             AutoUpgrade    = $True
         }
     )
-
-    Shortcuts          = @(
-        @{
-            Name      = "VLC Start Menu Shortcut"
-            Ensure    = "Present"
-            DependsOn = "[cChocoPackageInstaller]VLC"
-            Target    = "C:\Program Files\VideoLAN\VLC\vlc.exe"
-            Path      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\VLC Media Player.lnk"
-        }
-    )
     
     Files              = @(
         @{
+            Name            = "VLC Start Menu Shortcut"
+            Ensure          = "Present"
+            DependsOn       = "[cChocoPackageInstaller]VLC"
+            DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\VLC Media Player.lnk"
+            SourcePath      = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\VideoLAN\VLC Media Player.lnk"
+            Force           = $true
+            Type            = "File"
+        }
+        @{
             Name            = "VLC Start Menu Shortcuts Directory"
             Ensure          = "Absent"
-            DependsOn       = "[cChocoPackageInstaller]VLC"
+            DependsOn       = "[File]VLC Start Menu Shortcut"
             DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\VideoLAN\"
             Force           = $true
             Recurse         = $true
