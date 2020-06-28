@@ -5,6 +5,7 @@
             Ensure         = "present"
             DependsOn      = "[cChocoInstaller]installChoco"
             PackageName    = "git.install"
+            params         = "/NoShellIntegration"
             MinimumVersion = "2.27.0"
             Source         = "https://chocolatey.org/api/v2/"
             AutoUpgrade    = $True
