@@ -3,10 +3,10 @@
         @{
             Name           = "Sonos S1 Controller"
             Ensure         = "present"
-            DependsOn      = "[cChocoInstaller]installChoco"
+            DependsOn      = "[cChocoSource]sourceSquelchplopPublic"
             PackageName    = "sonos-s1-controller"
             MinimumVersion = "57.3.77280"
-            Source         = "https://pkgs.dev.azure.com/SquelchPlop/choco-public/_packaging/choco-public/nuget/v2/"
+            Source         = "source-squelchplop-public"
             AutoUpgrade    = $True
         }
     )

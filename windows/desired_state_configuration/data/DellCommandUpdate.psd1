@@ -3,10 +3,10 @@
         @{
             Name           = "Dell Command | Update"
             Ensure         = "present"
-            DependsOn      = "[cChocoInstaller]installChoco"
+            DependsOn      = "[cChocoSource]sourceChocolateyCommunity"
             PackageName    = "dellcommandupdate-uwp"
             MinimumVersion = "3.1.2"
-            Source         = "https://chocolatey.org/api/v2/"
+            Source         = "source-chocolatey-community"
             AutoUpgrade    = $True
         }
     )

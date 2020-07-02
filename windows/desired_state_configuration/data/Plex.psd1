@@ -3,10 +3,10 @@
         @{
             Name           = "Plex"
             Ensure         = "present"
-            DependsOn      = "[cChocoInstaller]installChoco"
+            DependsOn      = "[cChocoSource]sourceChocolateyCommunity"
             PackageName    = "plex"
             MinimumVersion = "1.13.0.1275"
-            Source         = "https://chocolatey.org/api/v2/"
+            Source         = "source-chocolatey-community"
             AutoUpgrade    = $True
         }
     )

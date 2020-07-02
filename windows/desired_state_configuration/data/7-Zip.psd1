@@ -3,10 +3,10 @@
         @{
             Name           = "7-Zip"
             Ensure         = "present"
-            DependsOn      = "[cChocoInstaller]installChoco"
+            DependsOn      = "[cChocoSource]sourceChocolateyCommunity"
             PackageName    = "7zip.install"
             MinimumVersion = "19.0"
-            Source         = "https://chocolatey.org/api/v2/"
+            Source         = "source-chocolatey-community"
             AutoUpgrade    = $True
         }
     )

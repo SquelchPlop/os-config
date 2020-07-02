@@ -3,11 +3,11 @@
         @{
             Name           = "Git for Windows"
             Ensure         = "present"
-            DependsOn      = "[cChocoInstaller]installChoco"
+            DependsOn      = "[cChocoSource]sourceChocolateyCommunity"
             PackageName    = "git.install"
             params         = "/NoShellIntegration"
             MinimumVersion = "2.27.0"
-            Source         = "https://chocolatey.org/api/v2/"
+            Source         = "source-chocolatey-community"
             AutoUpgrade    = $True
         }
     )

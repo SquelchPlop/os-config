@@ -3,10 +3,10 @@
         @{
             Name           = "XMind"
             Ensure         = "present"
-            DependsOn      = "[cChocoInstaller]installChoco"
+            DependsOn      = "[cChocoSource]sourceChocolateyCommunity"
             PackageName    = "xmind"
             MinimumVersion = "8.9"
-            Source         = "https://chocolatey.org/api/v2/"
+            Source         = "source-chocolatey-community"
             AutoUpgrade    = $True
         }
     )

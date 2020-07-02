@@ -3,10 +3,10 @@
         @{
             Name           = "Dymo Label"
             Ensure         = "Absent"
-            DependsOn      = "[cChocoInstaller]installChoco"
+            DependsOn      = "[cChocoSource]sourceChocolateyCommunity"
             PackageName    = "dymo-label"
             MinimumVersion = "8.7.3"
-            Source         = "https://chocolatey.org/api/v2/"
+            Source         = "source-chocolatey-community"
             AutoUpgrade    = $True
         }
     )

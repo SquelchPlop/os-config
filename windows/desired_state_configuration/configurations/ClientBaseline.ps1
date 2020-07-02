@@ -6,23 +6,64 @@ Configuration ClientBaseline {
     Import-DscResource -ModuleName 'DSCR_Shortcut'
 
     Node $AllNodes.NodeName {
-        cChocoInstaller installChoco
-        {
+        cChocoInstaller installChoco {
             InstallDir = "$env:ProgramData\chocolatey"
+        }
+
+        Script sourceSquelchplopPrivate {
+            DependsOn  = "[cChocoInstaller]installChoco"
+            GetScript  = { }
+            TestScript = { return $false } #Always apply in case token has changed
+            SetScript  = {
+                $registryPath = "HKLM:\Software\Chocolatey\source-squelchplop-private"
+
+                if (!(Test-Path $registryPath)) {
+                    throw "source-squelchplop-private user/token are not set in the registry!"
+                }
+
+                choco source add `
+                    --name='source-squelchplop-private' `
+                    --source='https://pkgs.dev.azure.com/SquelchPlop/choco-private/_packaging/choco-private/nuget/v2/' `
+                    --priority=2 `
+                    --user=$(Get-ItemPropertyValue -Path  $registryPath -name user) `
+                    --password=$(Get-ItemPropertyValue -Path  $registryPath -name token)
+            }
+        }
+
+        cChocoSource sourceSquelchplopPublic {
+            Ensure="Present"
+            DependsOn = "[cChocoInstaller]installChoco"
+            Name="source-squelchplop-public"
+            Source="https://pkgs.dev.azure.com/SquelchPlop/choco-public/_packaging/choco-public/nuget/v2/"
+            Priority= 1
+        }
+
+        cChocoSource sourceChocolateyCommunity {
+            Ensure="Present"
+            DependsOn = "[cChocoInstaller]installChoco"
+            Name="source-chocolatey-community"
+            Source="https://chocolatey.org/api/v2/"
+            Priority= 0
+        }
+
+        cChocoSource sourceChocolateyDefault {
+            Ensure="Absent"
+            DependsOn = "[cChocoInstaller]installChoco"
+            Name="Chocolatey"
         }
 
         foreach ($ChocolateyPackage in $Node.ChocolateyPackages) {
             # https://github.com/chocolatey/cChoco/blob/development/DSCResources/cChocoPackageInstall/cChocoPackageInstall.schema.mof
             cChocoPackageInstaller $ChocolateyPackage.Name {
-                Ensure         = $ChocolateyPackage.Ensure
-                DependsOn      = $ChocolateyPackage.DependsOn
-                Name           = $ChocolateyPackage.PackageName                
-                Params         = $ChocolateyPackage.Params
-                Version        = $ChocolateyPackage.MinimumVersion
+                Ensure      = $ChocolateyPackage.Ensure
+                DependsOn   = $ChocolateyPackage.DependsOn
+                Name        = $ChocolateyPackage.PackageName                
+                Params      = $ChocolateyPackage.Params
+                Version     = $ChocolateyPackage.MinimumVersion
                 #MinimumVersion = $ChocolateyPackage.MinimumVersion in development
-                Source         = $ChocolateyPackage.Source
-                chocoParams    = $ChocolateyPackage.chocoParams
-                AutoUpgrade    = $ChocolateyPackage.AutoUpgrade
+                Source      = $ChocolateyPackage.Source
+                chocoParams = $ChocolateyPackage.chocoParams
+                AutoUpgrade = $ChocolateyPackage.AutoUpgrade
             }
         }
 

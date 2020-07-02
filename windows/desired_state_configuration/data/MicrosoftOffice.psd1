@@ -3,11 +3,11 @@
         @{
             Name           = "Microsoft Office Click-to-Run"
             Ensure         = "present"
-            DependsOn      = "[cChocoInstaller]installChoco", "[File]Office Configuration XML file"
+            DependsOn      = "[cChocoSource]sourceSquelchplopPublic", "[File]Office Configuration XML file"
             PackageName    = "microsoft-office-click-to-run"
             params         = "/configuration-xml-file:C:\ProgramData\office_configuration.xml /kms:2019"
             MinimumVersion = "1.0.1"
-            Source         = "https://pkgs.dev.azure.com/SquelchPlop/choco-public/_packaging/choco-public/nuget/v2/"
+            Source         = "source-squelchplop-public"
             AutoUpgrade    = $True
         }
     )
