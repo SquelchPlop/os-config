@@ -31,5 +31,42 @@
             Recurse         = $true
             Type            = "Directory"
         }
+        @{
+            Name            = "XMind UE-V Template"
+            Ensure          = "Present"
+            DestinationPath = "C:\ProgramData\UEVTemplates\XMind #ALL.xml"
+            Force           = $true
+            Type            = "File"
+            Contents        = @"
+<?xml version="1.0" encoding="UTF-8"?>
+<SettingsLocationTemplate xmlns="http://schemas.microsoft.com/UserExperienceVirtualization/2013A/SettingsLocationTemplate">
+    <Name>XMind</Name>
+    <ID>XMind #ALL</ID>
+    <Version>1</Version>
+    <Author>
+        <Name>SquelchPlop</Name>
+    </Author>
+    <Processes>
+        <Process>
+            <Filename>XMind.exe</Filename>
+        </Process>
+    </Processes>
+    <Settings>
+        <File>
+            <Root>
+                <EnvironmentVariable>USERPROFILE</EnvironmentVariable>
+            </Root>
+            <Path Recursive="true">Application Data\XMind\configuration-cathy_win32</Path>
+        </File>
+        <File>
+            <Root>
+                <EnvironmentVariable>USERPROFILE</EnvironmentVariable>
+            </Root>
+            <Path Recursive="true">Application Data\XMind\workspace-cathy</Path>
+        </File>
+    </Settings>
+</SettingsLocationTemplate>
+"@
+        }
     )
 }

@@ -67,6 +67,16 @@ Configuration ClientBaseline {
             }
         }
 
+        foreach ($Service in $Node.Services) {
+            Service $Service.Name {
+                Ensure      = $Service.Ensure
+                DependsOn   = $Service.DependsOn
+                Name        = $Service.ServiceName
+                StartupType = $Service.StartupType
+                State       = $Service.State
+            }
+        }
+
         foreach ($File in $Node.Files) {
             # https://docs.microsoft.com/en-us/powershell/scripting/dsc/reference/resources/windows/fileresource?view=powershell-7
             File $File.Name {

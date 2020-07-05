@@ -21,5 +21,33 @@
             Recurse         = $true
             Type            = "Directory"
         }
+        @{
+            Name            = "7-Zip File Manager UE-V Template"
+            Ensure          = "Present"
+            DestinationPath = "C:\ProgramData\UEVTemplates\7-Zip File Manager #ALL.xml"
+            Force           = $true
+            Type            = "File"
+            Contents        = @"
+<?xml version="1.0" encoding="UTF-8"?>
+<SettingsLocationTemplate xmlns="http://schemas.microsoft.com/UserExperienceVirtualization/2013A/SettingsLocationTemplate">
+    <Name>7-Zip File Manager</Name>
+    <ID>7-Zip File Manager #ALL</ID>
+    <Version>1</Version>
+    <Author>
+        <Name>SquelchPlop</Name>
+    </Author>
+    <Processes>
+        <Process>
+            <Filename>7zFM.exe</Filename>
+        </Process>
+    </Processes>
+    <Settings>
+        <Registry>
+            <Path Recursive="true">SOFTWARE\7-Zip</Path>
+        </Registry>
+    </Settings>
+</SettingsLocationTemplate>
+"@
+        }
     )
 }

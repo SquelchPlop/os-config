@@ -38,5 +38,36 @@
             Force           = $true
             Type            = "File"
         }
+        @{
+            Name            = "VLC UE-V Template"
+            Ensure          = "Present"
+            DestinationPath = "C:\ProgramData\UEVTemplates\VLC Media Player #ALL.xml"
+            Force           = $true
+            Type            = "File"
+            Contents        = @"
+<?xml version="1.0" encoding="UTF-8"?>
+<SettingsLocationTemplate xmlns="http://schemas.microsoft.com/UserExperienceVirtualization/2013A/SettingsLocationTemplate">
+    <Name>VLC Media Player</Name>
+    <ID>VLC Media Player #ALL</ID>
+    <Version>1</Version>
+    <Author>
+        <Name>SquelchPlop</Name>
+    </Author>
+    <Processes>
+        <Process>
+            <Filename>vlc.exe</Filename>
+        </Process>
+    </Processes>
+    <Settings>
+        <File>
+            <Root>
+                <EnvironmentVariable>APPDATA</EnvironmentVariable>
+            </Root>
+            <Path Recursive="true">vlc</Path>
+        </File>
+    </Settings>
+</SettingsLocationTemplate>
+"@
+        }
     )
 }
