@@ -2221,7 +2221,7 @@ the UE-V product documentation.  http://go.microsoft.com/fwlink/?LinkId=260889
     <ID>Microsoft Outlook Profiles #16</ID>
     <Version>1</Version>
     <Author>
-        <Name>Matt Hadley</Name>
+        <Name>SquelchPlop</Name>
     </Author>
     <Processes>
         <Process>
