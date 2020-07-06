@@ -1,13 +1,13 @@
 @{
-    Services = @(
-        @{
-            Name        = "User Experience Virtualization"
-            Ensure      = "Present"
-            ServiceName = "UevAgentService"
-            StartupType = "Automatic"
-            State       = "Running"
-        }
-    )
+    # Services = @(
+    #     @{
+    #         Name        = "User Experience Virtualization"
+    #         Ensure      = "Present"
+    #         ServiceName = "UevAgentService"
+    #         StartupType = "Automatic"
+    #         State       = "Running"
+    #     }
+    # )
 
     Policies = @(
         ################################ MACHINE SETTINGS ################################
@@ -25,7 +25,7 @@
             PolicyType   = 'Machine'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\DontSyncWindows8AppSettings'
             Type         = 'DWord'
-            Data         = '0'
+            Data         = '1'
         }
         @{
             Name         = 'Windows Components > Microsoft User Experience Virtualization > Enable UE-V'
