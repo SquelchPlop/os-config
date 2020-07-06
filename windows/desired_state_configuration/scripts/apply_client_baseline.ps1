@@ -17,6 +17,9 @@ Invoke-RestMethod -URI "https://github.com/SquelchPlop/os-config/releases/downlo
 if(-not $(Test-PSRemoting -ComputerName "localhost")){
     Enable-PSRemoting -SkipNetworkProfileCheck
 }
+
+Set-WSManInstance -ResourceURI winrm/config -ValueSet @{MaxEnvelopeSizekb = "1024"} 
+
 Start-DscConfiguration -Path ./ -Wait -Verbose -Force
 
 # Refresh Local Group Policy

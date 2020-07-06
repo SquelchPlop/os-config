@@ -25,7 +25,7 @@
             PolicyType   = 'Machine'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\DontSyncWindows8AppSettings'
             Type         = 'DWord'
-            Data         = '1'
+            Data         = '0' #Enable if using Windows 10 sync - https://docs.microsoft.com/en-us/windows/configuration/ue-v/uev-whats-new-in-uev-for-windows#compatibility-with-microsoft-enterprise-state-roaming
         }
         @{
             Name         = 'Windows Components > Microsoft User Experience Virtualization > Enable UE-V'
@@ -34,6 +34,14 @@
             KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Enabled'
             Type         = 'DWord'
             Data         = '1'
+        }
+        @{
+            Name         = 'Windows Components > Microsoft User Experience Virtualization > Enable UE-V > Register Inbox Templates'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\RegisterInboxTemplates'
+            Type         = 'DWord'
+            Data         = '0'
         }
         @{
             Name         = 'Windows Components > Microsoft User Experience Virtualization > Settings storage path'
@@ -51,67 +59,59 @@
             Type         = 'ExpandString'
             Data         = 'C:\ProgramData\UEVTemplates'
         }
-        # @{
-        #     Name         = 'Windows Components > Microsoft User Experience Virtualization > Settings template catalog path > Replace the default Microsoft templates'
-        #     Ensure       = 'Present'
-        #     PolicyType   = 'Machine'
-        #     KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\OverrideMSTemplates'
-        #     Type         = 'DWord'
-        #     Data         = '1'
-        # }
-        # @{
-        #     Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Desktop settings'
-        #     Ensure       = 'Present'
-        #     PolicyType   = 'Machine'
-        #     KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\DesktopSettings'
-        #     Type         = 'DWord'
-        #     Data         = '1'
-        # }
-        # @{
-        #     Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Ease of access'
-        #     Ensure       = 'Present'
-        #     PolicyType   = 'Machine'
-        #     KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\EaseOfAccessSettings'
-        #     Type         = 'DWord'
-        #     Data         = '1'
-        # }
-        # @{
-        #     Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Themes'
-        #     Ensure       = 'Present'
-        #     PolicyType   = 'Machine'
-        #     KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\ThemeSettings'
-        #     Type         = 'DWord'
-        #     Data         = '1'
-        # }
-        # @{
-        #     Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Roaming Credentials'
-        #     Ensure       = 'Present'
-        #     PolicyType   = 'Machine'
-        #     KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\RoamingCredentialSettings'
-        #     Type         = 'DWord'
-        #     Data         = '1'
-        # }
-        # @{
-        #     Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Network Printers'
-        #     Ensure       = 'Present'
-        #     PolicyType   = 'Machine'
-        #     KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\NetworkPrinters'
-        #     Type         = 'DWord'
-        #     Data         = '0'
-        # }
+        @{
+            Name         = 'Windows Components > Microsoft User Experience Virtualization > Settings template catalog path > Replace the default Microsoft templates'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\OverrideMSTemplates'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Desktop settings'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\DesktopSettings'
+            Type         = 'DWord'
+            Data         = '0' #Disable if using Windows 10 sync - https://docs.microsoft.com/en-us/windows/configuration/ue-v/uev-whats-new-in-uev-for-windows#compatibility-with-microsoft-enterprise-state-roaming
+        }
+        @{
+            Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Ease of access'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\EaseOfAccessSettings'
+            Type         = 'DWord'
+            Data         = '0' #Disable if using Windows 10 sync - https://docs.microsoft.com/en-us/windows/configuration/ue-v/uev-whats-new-in-uev-for-windows#compatibility-with-microsoft-enterprise-state-roaming
+        }
+        @{
+            Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Network Printers'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\NetworkPrinters'
+            Type         = 'DWord'
+            Data         = '0' #Disable if using Windows 10 sync - https://docs.microsoft.com/en-us/windows/configuration/ue-v/uev-whats-new-in-uev-for-windows#compatibility-with-microsoft-enterprise-state-roaming
+        }
+        @{
+            Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Roaming Credentials'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\RoamingCredentialSettings'
+            Type         = 'DWord'
+            Data         = '0' #Disable if using Windows 10 sync - https://docs.microsoft.com/en-us/windows/configuration/ue-v/uev-whats-new-in-uev-for-windows#compatibility-with-microsoft-enterprise-state-roaming
+        }
+        @{
+            Name         = 'Windows Components > Microsoft User Experience Virtualization > Synchronize Windows settings > Themes'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\WindowsSettings\ThemeSettings'
+            Type         = 'DWord'
+            Data         = '0' #Disable if using Windows 10 sync - https://docs.microsoft.com/en-us/windows/configuration/ue-v/uev-whats-new-in-uev-for-windows#compatibility-with-microsoft-enterprise-state-roaming
+        }
         @{
             Name         = 'Windows Components > Microsoft User Experience Virtualization > Sync Unlisted Windows Apps'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\SyncUnlistedWindows8Apps'
-            Type         = 'DWord'
-            Data         = '1'
-        }
-        @{
-            Name         = 'Windows Components > Microsoft User Experience Virtualization > Use User Experience Virtualization (UE-V)'
-            Ensure       = 'Present'
-            PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\UEV\Agent\Configuration\SyncEnabled'
             Type         = 'DWord'
             Data         = '1'
         }
