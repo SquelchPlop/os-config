@@ -710,7 +710,7 @@ the UE-V product documentation.  http://go.microsoft.com/fwlink/?LinkId=260889
         <Name Locale="zh-cn">主题设置</Name>
         <Name Locale="zh-tw">佈景主題設定</Name>
     </LocalizedNames>
-    <Version>1</Version>
+    <Version>2</Version>
     <DeferToMSAccount />
     <Processes>
         <ShellProcess />
@@ -726,6 +726,9 @@ the UE-V product documentation.  http://go.microsoft.com/fwlink/?LinkId=260889
             <Path Recursive="false">Control Panel\Desktop</Path>
             <Name>WallpaperStyle</Name>
             <Name>TileWallpaper</Name>
+        </Registry>
+        <Registry>
+            <Path Recursive="true">SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize</Path>
         </Registry>
         <SystemParameter>DeskWallpaper</SystemParameter>
         <SystemParameter>DesktopColor</SystemParameter>

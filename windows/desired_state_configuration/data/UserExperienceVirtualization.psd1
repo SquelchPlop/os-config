@@ -1,16 +1,41 @@
 @{
-    # Services = @(
-    #     @{
-    #         Name        = "User Experience Virtualization"
-    #         Ensure      = "Present"
-    #         ServiceName = "UevAgentService"
-    #         StartupType = "Automatic"
-    #         State       = "Running"
-    #     }
-    # )
+    Services = @(
+        @{
+            Name        = "User Experience Virtualization"
+            Ensure      = "Present"
+            ServiceName = "UevAgentService"
+            StartupType = "Automatic"
+            State       = "Running"
+        }
+    )
 
     Policies = @(
         ################################ MACHINE SETTINGS ################################
+        @{
+            Name         = 'CustomerExperienceImprovementProgram' #Not a policy (configured directly) see https://support.microsoft.com/en-gb/help/2770042/ue-v-registry-settings
+            Ensure       = 'Absent'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Microsoft\UEV\Agent\Configuration\CustomerExperienceImprovementProgram'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
+            Name         = 'Do not synchronize Windows Apps' #Not a policy (configured directly)
+            Ensure       = 'Absent'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Microsoft\UEV\Agent\Configuration\DontSyncWindows8AppSettings'
+            Type         = 'DWord'
+            Data         = '0' #Enable if using Windows 10 sync - https://docs.microsoft.com/en-us/windows/configuration/ue-v/uev-whats-new-in-uev-for-windows#compatibility-with-microsoft-enterprise-state-roaming
+        }
+        @{
+            Name         = 'Hide Settings Package directory' #Not a policy (configured directly) see https://support.microsoft.com/en-gb/help/2770042/ue-v-registry-settings
+            Ensure       = 'Absent'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Microsoft\UEV\Agent\Configuration\HideSettingsPackagesFolder'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        
         @{
             Name         = 'Windows Components > Microsoft User Experience Virtualization > Configure Sync Method'
             Ensure       = 'Present'

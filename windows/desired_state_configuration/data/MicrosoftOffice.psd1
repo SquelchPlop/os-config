@@ -58,7 +58,7 @@
 <User Key="software\microsoft\office\16.0\common\fixedformat" Name="disablepublishtofixedformat" Value="1" Type="REG_DWORD" App="office16" Id="L_Specifytypesoffixedformatoptionsavailabletotheuser" />
 <User Key="software\microsoft\office\16.0\common\general" Name="optindisable" Value="1" Type="REG_DWORD" App="office16" Id="L_SuppressRecommendedSettingsDialog" />
 <User Key="software\microsoft\office\16.0\common\feedback" Name="enabled" Value="0" Type="REG_DWORD" App="office16" Id="L_SendFeedback" />
-<User Key="software\microsoft\office\16.0\common\signin" Name="signinoptions" Value="1" Type="REG_DWORD" App="office16" Id="L_SignInOptions" />
+<User Key="software\microsoft\office\16.0\common\signin" Name="signinoptions" Value="0" Type="REG_DWORD" App="office16" Id="L_SignInOptions" />
 <User Key="software\microsoft\office\16.0\firstrun" Name="disablemovie" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableMovie" />
 <User Key="software\microsoft\office\16.0\firstrun" Name="bootedrtm" Value="1" Type="REG_DWORD" App="office16" Id="L_DisableOfficeFirstrun" />
 <User Key="software\microsoft\office\16.0\common\internet" Name="onlinestorage" Value="4" Type="REG_DWORD" App="office16" Id="L_OnlineStorageFilter" />
@@ -158,12 +158,12 @@
             Data         = '1' #Disable XPS
         }
         @{
-            Name         = 'Office > Miscellaneous > Block signing into Office' #Set to Microsoft Account only
+            Name         = 'Office > Miscellaneous > Block signing into Office'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\signin\signinoptions'
             Type         = 'DWord'
-            Data         = '1'
+            Data         = '0'
         }
         @{
             Name         = 'Office > Miscellaneous > Hide file locations when opening or saving files'
@@ -244,6 +244,14 @@
             KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\sendcustomerdata'
             Type         = 'DWord'
             Data         = '0'
+        }
+        @{
+            Name         = 'Office > Tools | Options | General | Service Options... > Online Content > Online Content Options'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\office\16.0\common\internet\useonlinecontent'
+            Type         = 'DWord'
+            Data         = '2'
         }
         @{
             Name         = "Office > What's New > Don't show the What's New information for Excel"

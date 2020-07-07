@@ -121,6 +121,22 @@
             Type         = 'DWord'
             Data         = '1'
         }
+        @{
+            Name         = 'Windows > Windows Components > Sync your settings > Do not sync'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\SettingSync\DisableSettingSync'
+            Type         = 'DWord'
+            Data         = '2'
+        }
+        @{
+            Name         = 'Windows > Windows Components > Sync your settings > Do not sync (user override)'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\SettingSync\DisableSettingSyncUserOverride'
+            Type         = 'DWord'
+            Data         = '1'
+        }
         ############################## END MACHINE SETTINGS ##############################
 
         ################################# USER SETTINGS #################################
