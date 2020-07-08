@@ -94,6 +94,15 @@
 
         ################################# USER SETTINGS #################################
         @{
+            Name         = 'Do not display privacy notice' #Not a policy
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Microsoft\office\16.0\Common\PrivacyNoticeShown'
+            Type         = 'DWord'
+            Data         = '2'
+        }
+
+        @{
             Name         = 'Excel > Excel Options > Save > Default file format'
             Ensure       = 'Present'
             PolicyType   = 'User'

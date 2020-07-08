@@ -31,6 +31,14 @@
             Data         = 'odfafepnkmbhccpbejgmiehpchacaeak'
         }
         @{
+            Name         = "Microsoft Edge > Password manager and protection > Enable saving passwords to the password manager"
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\PasswordManagerEnabled'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
             Name         = 'Microsoft Edge > SmartScreen settings > Configure Microsoft Defender SmartScreen'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
@@ -46,14 +54,6 @@
             Type         = 'DWord'
             Data         = '1' #Restore the last session
         } 
-        @{
-            Name         = 'Microsoft Edge > Hide the First-run experience and splash screen'
-            Ensure       = 'Present'
-            PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\HideFirstRunExperience'
-            Type         = 'DWord'
-            Data         = '1'
-        }
         @{
             Name         = 'Microsoft Edge > Allow personalization of ads, search and news by sending browsing history to Microsoft'
             Ensure       = 'Present'
@@ -98,6 +98,22 @@
             Name         = "Microsoft Edge > Disable synchronization of data using Microsoft sync services"
             Ensure       = 'Present'
             PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\SyncDisabled'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
+            Name         = 'Microsoft Edge > Hide the First-run experience and splash screen'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\HideFirstRunExperience'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = "Microsoft Edge > Manage Search Engines"
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ManagedSearchEngines'
             Type         = 'String'
             Data         = '
@@ -121,14 +137,6 @@
             ]'
         }
         @{
-            Name         = "Microsoft Edge > Manage Search Engines"
-            Ensure       = 'Present'
-            PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\SyncDisabled'
-            Type         = 'DWord'
-            Data         = '0'
-        }
-        @{
             Name         = "Microsoft Edge > Send site information to improve Microsoft services"
             Ensure       = 'Present'
             PolicyType   = 'Machine'
@@ -137,15 +145,7 @@
             Data         = '0'
         }
         @{
-            Name         = "Microsoft Edge > Enable saving passwords to the password manager"
-            Ensure       = 'Present'
-            PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\PasswordManagerEnabled'
-            Type         = 'DWord'
-            Data         = '0'
-        }
-        @{
-            Name         = "Microsoft Edge Update > Prevent Desktop Shortcut creation upon install default"
+            Name         = "Microsoft Edge Update > Applications > Prevent Desktop Shortcut creation upon install default"
             Ensure       = 'Present'
             PolicyType   = 'Machine'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\EdgeUpdate\CreateDesktopShortcutDefault'
