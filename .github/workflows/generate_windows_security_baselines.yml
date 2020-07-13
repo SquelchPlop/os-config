@@ -25,12 +25,11 @@ jobs:
 
     - name: Generate baselines
       run: |
-        mkdir baselines
         Install-Module BaselineManagement -Force
-        ls
-        ConvertFrom-GPO -Path .\unzipped\*Edge*\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\edge\
-        ConvertFrom-GPO -Path .\unzipped\office\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\office\
-        ConvertFrom-GPO -Path .\unzipped\windows\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\windows\
+
+        ConvertFrom-GPO -Path .\unzipped\*Edge*\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\edge\ -ErrorAction Ignore
+        ConvertFrom-GPO -Path .\unzipped\office\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\office\ -ErrorAction Ignore
+        ConvertFrom-GPO -Path .\unzipped\windows\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\windows\ -ErrorAction Ignore
 
     - uses: actions/upload-artifact@v2
       with:
