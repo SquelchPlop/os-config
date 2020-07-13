@@ -1,4 +1,25 @@
 @{
+    IniFiles = @(
+        @{
+            Name     = "Run OneDrive UEV OS Settings Script at Logoff (Command Line)"
+            Ensure   = "Present"
+            Path     = "C:\Windows\System32\GroupPolicy\User\Scripts\scripts.ini"
+            Key      = "0CmdLine"
+            Value    = "powershell.exe"
+            Section  = "Logoff"
+            Encoding = "unicode"
+        }
+        @{
+            Name     = "Run OneDrive UEV OS Settings Script at Logoff (Parameters)"
+            Ensure   = "Present"
+            Path     = "C:\Windows\System32\GroupPolicy\User\Scripts\scripts.ini"
+            Key      = "0Parameters"
+            Value    = '-NonInteractive -ExecutionPolicy Bypass -Command "$(Get-ChildItem -Path $env:OneDrive\SettingsPackages\OS* -Recurse) + $(Get-ChildItem -Path $env:OneDrive\SettingsPackages\OS* -Directory) | ForEach-Object{attrib -U +P /S /D $($_.FullName)}"'
+            Section  = "Logoff"
+            Encoding = "unicode"
+        }
+    )
+    
     Services = @(
         @{
             Name        = "User Experience Virtualization"

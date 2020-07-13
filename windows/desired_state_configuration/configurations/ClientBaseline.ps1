@@ -4,6 +4,7 @@ Configuration ClientBaseline {
     Import-DscResource -ModuleName 'cChoco'
     Import-DscResource -ModuleName 'PolicyFileEditor'
     Import-DscResource -ModuleName 'DSCR_Shortcut'
+    Import-DscResource -ModuleName 'DSCR_IniFIle'
 
     Node $AllNodes.NodeName {
         cChocoInstaller installChoco {
@@ -91,6 +92,19 @@ Configuration ClientBaseline {
                 Type            = $File.Type
                 MatchSource     = $File.MatchSource
                 Contents        = $File.Contents
+            }
+        }
+
+        foreach ($iniFile in $Node.IniFiles) {
+            # https://github.com/mkht/DSCR_IniFile/blob/master/DSCResources/cIniFile/cIniFile.schema.mof
+            cIniFile $iniFile.Name {
+                Ensure    = $iniFile.Ensure
+                DependsOn = $iniFile.DependsOn
+                Path      = $iniFile.Path
+                Key       = $iniFile.Key
+                Value     = $iniFile.Value
+                Section   = $iniFile.Section
+                Encoding  = $iniFile.Encoding
             }
         }
 

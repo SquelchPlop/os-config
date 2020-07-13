@@ -25,6 +25,10 @@ $modules = @(
         Name    = "DSCR_Shortcut"
         Version = "1.3.8"
     }
+    @{
+        Name    = "DSCR_IniFile"
+        Version = "3.1.0"
+    }
 )
 
 $packageProviders | foreach-Object {
