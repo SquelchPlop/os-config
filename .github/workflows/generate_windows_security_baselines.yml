@@ -27,8 +27,8 @@ jobs:
       run: |
         mkdir baselines
         Install-Module BaselineManagement -Force
-
-        ConvertFrom-GPO -Path .\unzipped\*edge*\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\edge\
+        ls
+        ConvertFrom-GPO -Path .\unzipped\*Edge*\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\edge\
         ConvertFrom-GPO -Path .\unzipped\office\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\office\
         ConvertFrom-GPO -Path .\unzipped\windows\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\windows\
 
