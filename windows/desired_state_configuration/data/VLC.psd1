@@ -10,6 +10,21 @@
             AutoUpgrade    = $True
         }
     )
+
+    RegistryKeys       = @(
+        @{
+            Name      = "Remove VLC add to playlist context menu"
+            Ensure    = "Absent"
+            Key       = "HKEY_CLASSES_ROOT\Directory\shell\AddToPlaylistVLC"
+            ValueName = ''
+        }
+        @{
+            Name      = "Remove VLC play context menu"
+            Ensure    = "Absent"
+            Key       = "HKEY_CLASSES_ROOT\Directory\shell\PlayWithVLC"
+            ValueName = ''
+        }
+    )
     
     Files              = @(
         @{

@@ -78,6 +78,16 @@ Configuration ClientBaseline {
             }
         }
 
+        foreach ($RegistryKey in $Node.RegistryKeys) {
+            Registry $RegistryKey.Name {
+                Ensure    = $RegistryKey.Ensure
+                DependsOn = $RegistryKey.DependsOn
+                Key       = $RegistryKey.Key
+                ValueName = $RegistryKey.ValueName
+                Force     = $True
+            }
+        }
+
         foreach ($File in $Node.Files) {
             # https://docs.microsoft.com/en-us/powershell/scripting/dsc/reference/resources/windows/fileresource?view=powershell-7
             File $File.Name {
