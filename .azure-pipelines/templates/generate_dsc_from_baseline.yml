@@ -1,0 +1,21 @@
+parameters:
+  - name: baselineZipUrl
+    type: string
+
+jobs:
+  - job: Generate DSC
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - powershell: |
+          Invoke-WebRequest -Uri ${{ parameters.baselineZipUrl }} -OutFile downloaded_baseline.zip
+          Expand-Archive -Path downloaded_baseline.zip -DestinationPath unzipped
+
+          Install-Module BaselineManagement -Force
+          ConvertFrom-GPO -Path .\unzipped\*\GPOs\ -OutputPath $(Build.ArtifactStagingDirectory) -OutputConfigurationScript
+        displayName: Download and convert baseline
+
+      - task: PublishPipelineArtifact@1
+        inputs:
+          artifactName: Generated Zips
+          targetPath: $(Build.ArtifactStagingDirectory)
