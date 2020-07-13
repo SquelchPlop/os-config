@@ -1,0 +1,38 @@
+name: Generate Windows security baselines as DSC
+
+on:
+  push:
+    paths:
+      - '.github/workflows/generate_windows_security_baselines.yml'
+
+jobs:
+  generate_windows_security_baselines:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download baselines
+      run: |
+        Invoke-WebRequest -Uri "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Microsoft%20Edge%20v80.zip" -OutFile edge_baseline.zip
+        Expand-Archive -Path edge_baseline.zip -DestinationPath unzipped
+
+        Invoke-WebRequest -Uri "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Office365-ProPlus-Sept2019-FINAL.zip" -OutFile office_baseline.zip
+        Expand-Archive -Path office_baseline.zip -DestinationPath unzipped\office
+
+        Invoke-WebRequest -Uri "https://download.microsoft.com/download/8/5/C/85C25433-A1B0-4FFA-9429-7E023E7DA8D8/Windows%2010%20Version%201909%20and%20Windows%20Server%20Version%201909%20Security%20Baseline.zip" -OutFile windows_baseline.zip
+        Expand-Archive -Path windows_baseline.zip -DestinationPath unzipped\windows
+
+    - name: Generate baselines
+      run: |
+        mkdir baselines
+        Install-Module BaselineManagement -Force
+
+        ConvertFrom-GPO -Path .\unzipped\*edge*\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\edge\
+        ConvertFrom-GPO -Path .\unzipped\office\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\office\
+        ConvertFrom-GPO -Path .\unzipped\windows\GPOs\ -OutputConfigurationScript -OutputPath .\baselines\windows\
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: baselines
+        path: ./baselines/*
