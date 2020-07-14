@@ -82,6 +82,14 @@
             Data         = '1'
         }
         @{
+            Name         = 'Windows > Windows Components > Cloud Content > Turn off Microsoft consumer experiences'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\DisableWindowsConsumerFeatures'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
             Name         = 'Windows > Windows Components > Data Collection and Preview Builds > Allow device name to be sent in Windows diagnostic data'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
@@ -142,7 +150,7 @@
         ################################# USER SETTINGS #################################
         @{
             Name         = 'Windows > Windows Components > Cloud Content > Configure Windows spotlight on lock screen'
-            Ensure       = 'Present'
+            Ensure       = 'Absent'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\ConfigureWindowsSpotlight'
             Type         = 'DWord'

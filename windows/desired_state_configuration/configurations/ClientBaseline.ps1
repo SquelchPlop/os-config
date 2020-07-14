@@ -11,46 +11,23 @@ Configuration ClientBaseline {
             InstallDir = "$env:ProgramData\chocolatey"
         }
 
-        Script sourceSquelchplopPrivate {
-            DependsOn  = "[cChocoInstaller]installChoco"
-            GetScript  = { }
-            TestScript = { return $false } #Always apply in case token has changed
-            SetScript  = {
-                $registryPath = "HKLM:\Software\Chocolatey\source-squelchplop-private"
-
-                if (!(Test-Path $registryPath)) {
-                    throw "source-squelchplop-private user/token are not set in the registry!"
-                }
-
-                choco source add `
-                    --name='source-squelchplop-private' `
-                    --source='https://pkgs.dev.azure.com/SquelchPlop/choco-private/_packaging/choco-private/nuget/v2/' `
-                    --priority=2 `
-                    --user=$(Get-ItemPropertyValue -Path  $registryPath -name user) `
-                    --password=$(Get-ItemPropertyValue -Path  $registryPath -name token)
+        foreach ($Script in $Node.Scripts) {
+            Script $Script.Name {
+                DependsOn  = $Script.DependsOn
+                GetScript  = $Script.GetScript.ToString().TrimStart("{").TrimEnd("}")
+                TestScript = $Script.TestScript.ToString().TrimStart("{").TrimEnd("}")
+                SetScript  = $Script.SetScript.ToString().TrimStart("{").TrimEnd("}")
             }
         }
 
-        cChocoSource sourceSquelchplopPublic {
-            Ensure="Present"
-            DependsOn = "[cChocoInstaller]installChoco"
-            Name="source-squelchplop-public"
-            Source="https://pkgs.dev.azure.com/SquelchPlop/choco-public/_packaging/choco-public/nuget/v2/"
-            Priority= 1
-        }
-
-        cChocoSource sourceChocolateyCommunity {
-            Ensure="Present"
-            DependsOn = "[cChocoInstaller]installChoco"
-            Name="source-chocolatey-community"
-            Source="https://chocolatey.org/api/v2/"
-            Priority= 0
-        }
-
-        cChocoSource sourceChocolateyDefault {
-            Ensure="Absent"
-            DependsOn = "[cChocoInstaller]installChoco"
-            Name="Chocolatey"
+        foreach ($ChocolateySource in $Node.ChocolateySources){
+            cChocoSource $ChocolateySource.Name {
+                Ensure = $ChocolateySource.Ensure
+                DependsOn = $ChocolateySource.DependsOn
+                Name = $ChocolateySource.SourceName
+                Source = $ChocolateySource.SourceUrl
+                Priority = $ChocolateySource.Priority
+            }
         }
 
         foreach ($ChocolateyPackage in $Node.ChocolateyPackages) {
