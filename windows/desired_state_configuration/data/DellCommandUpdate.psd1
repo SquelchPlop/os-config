@@ -10,4 +10,15 @@
             AutoUpgrade    = $True
         }
     )
+
+    Files              = @(
+        @{
+            Name            = "Dell Start Menu Shortcuts Directory"
+            Ensure          = "Absent"
+            DestinationPath = "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Dell\"
+            Force           = $true
+            Recurse         = $true
+            Type            = "Directory"
+        }
+    )
 }
