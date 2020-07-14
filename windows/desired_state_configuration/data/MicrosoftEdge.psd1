@@ -130,9 +130,9 @@
                     "name": "Google",
                     "keyword": "Google",
                     "is_default": false,
-                    "search_url": "https://www.google.de/search?q={searchTerms}",
-                    "image_search_url": "https://www.google.de/search?q={searchTerms}&tbm=isch",
-                    "suggest_url": "https://www.google.de/complete/search?q={searchTerms}&output=chrome"
+                    "search_url": "https://www.google.co.uk/search?q={searchTerms}",
+                    "image_search_url": "https://www.google.co.uk/search?q={searchTerms}&tbm=isch",
+                    "suggest_url": "https://www.google.co.uk/complete/search?q={searchTerms}&output=chrome"
                 }
             ]'
         }
