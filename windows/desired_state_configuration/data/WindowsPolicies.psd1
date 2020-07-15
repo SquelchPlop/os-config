@@ -158,9 +158,25 @@
         ################################# USER SETTINGS #################################
         @{
             Name         = 'Windows > Windows Components > Cloud Content > Configure Windows spotlight on lock screen'
-            Ensure       = 'Absent'
+            Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\ConfigureWindowsSpotlight'
+            Type         = 'DWord'
+            Data         = '1'
+        }
+        @{
+            Name         = 'Windows > Windows Components > Cloud Content > Configure Windows spotlight on lock screen > Include content from Enterprise spotlight'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\IncludeEnterpriseSpotlight'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
+            Name         = 'Windows > Windows Components > Cloud Content > Do not suggest third-party content in Windows spotlight'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\DisableThirdPartySuggestions'
             Type         = 'DWord'
             Data         = '1'
         }
@@ -173,12 +189,28 @@
             Data         = '1'
         }
         @{
+            Name         = 'Windows > Windows Components > Cloud Content > Turn off all Windows spotlight features'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\DisableWindowsSpotlightFeatures'
+            Type         = 'DWord'
+            Data         = '0'
+        }
+        @{
             Name         = 'Windows > Windows Components > Cloud Content > Turn off the Windows Welcome Experience'
             Ensure       = 'Present'
             PolicyType   = 'User'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\DisableWindowsSpotlightWindowsWelcomeExperience'
             Type         = 'DWord'
             Data         = '1'
+        }
+        @{
+            Name         = 'Windows > Windows Components > Cloud Content > Turn off Windows Spotlight on Action Center'
+            Ensure       = 'Present'
+            PolicyType   = 'User'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\CloudContent\DisableWindowsSpotlightOnActionCenter'
+            Type         = 'DWord'
+            Data         = '0'
         }
         @{
             Name         = 'Windows > Windows Components > Cloud Content > Turn off Windows Spotlight on Settings'
