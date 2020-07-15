@@ -74,6 +74,14 @@
             Data         = '30'
         }
         @{
+            Name         = 'Windows > System > Storage Sense > Configure Storage Sense Cloud Content dehydration threshold'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Windows\StorageSense\ConfigStorageSenseCloudContentDehydrationThreshold'
+            Type         = 'DWord'
+            Data         = '60'
+        }
+        @{
             Name         = 'Windows > Windows Components > Cloud Content > Do not show Windows Tips'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
