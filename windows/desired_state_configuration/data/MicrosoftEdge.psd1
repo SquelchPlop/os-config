@@ -31,6 +31,14 @@
             Data         = 'odfafepnkmbhccpbejgmiehpchacaeak'
         }
         @{
+            Name         = 'Microsoft Edge > Extensions > Control which extensions are installed silently (Bitwarden)'
+            Ensure       = 'Present'
+            PolicyType   = 'Machine'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist\3'
+            Type         = 'String'
+            Data         = 'jbkfoedolllekgbhcbcoahefnbanhhlh'
+        }
+        @{
             Name         = "Microsoft Edge > Password manager and protection > Enable saving passwords to the password manager"
             Ensure       = 'Present'
             PolicyType   = 'Machine'
