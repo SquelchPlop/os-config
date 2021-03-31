@@ -15,18 +15,10 @@
     Policies = @(
         ################################ MACHINE SETTINGS ################################
         @{
-            Name         = 'Microsoft Edge > Extensions > Control which extensions are installed silently (LastPass)'
-            Ensure       = 'Present'
-            PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist\1'
-            Type         = 'String'
-            Data         = 'bbcinlkgjjkejfdpemiealijmmooekmp'
-        }
-        @{
             Name         = 'Microsoft Edge > Extensions > Control which extensions are installed silently (uBlockOrigin)'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist\2'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist\1'
             Type         = 'String'
             Data         = 'odfafepnkmbhccpbejgmiehpchacaeak'
         }
@@ -34,7 +26,7 @@
             Name         = 'Microsoft Edge > Extensions > Control which extensions are installed silently (Bitwarden)'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
-            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist\3'
+            KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist\2'
             Type         = 'String'
             Data         = 'jbkfoedolllekgbhcbcoahefnbanhhlh'
         }
