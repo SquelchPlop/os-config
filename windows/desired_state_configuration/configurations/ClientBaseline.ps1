@@ -1,5 +1,5 @@
 Configuration ClientBaseline {
-    Import-DscResource -ModuleName 'PSDesiredStateConfiguration'
+    Import-DscResource -ModuleName 'PSDesiredStateConfiguration' 
     Import-DscResource -ModuleName 'xPSDesiredStateConfiguration'
     Import-DscResource -ModuleName 'cChoco'
     Import-DscResource -ModuleName 'PolicyFileEditor'
