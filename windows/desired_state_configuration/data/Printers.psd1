@@ -6,7 +6,7 @@
             TestScript = { return $false } #Always apply in case new printers added
             SetScript  = {
                 #Only printers in this list can be installed.  Any printers outside this list will be removed.
-                $AllowedPrinters = "PRINTER-01 Mono Laser", "PRINTER-02 Colour MFP", "PRINTER-03 Colour MFP", "Microsoft Print to PDF"
+                $AllowedPrinters = "PRINTER-01 Mono Laser", "PRINTER-03 Colour MFP", "Microsoft Print to PDF"
 
                 #To get minimal drivers (incl. INF file), install the manufacturer driver, then find the driver's directory in the driver store, without the crap.
                 $Printers = @(
@@ -23,20 +23,20 @@
                         DefaultColor         = $False;
                         DefaultPaperSize     = "A4";
                     }
-                    @{
-                        Name                 = "PRINTER-02 Colour MFP";
-                        HostAddress          = "PRINTER-02";
-                        DriverInstallCommand = "
-                            Invoke-WebRequest https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/printers/drivers/hp-pw477dw-pcl6-8.0.1329.6720.zip -OutFile $env:temp\hppw477.zip
-                            Expand-Archive $env:temp\hppw477.zip -DestinationPath $env:temp\hppw477
-                        "
-                        DriverFile           = "$env:temp\hppw477\hpmaD5114_x64.inf";
-                        DriverName           = "HP PageWide Pro 477dw MFP PCL-6";
-                        DuplexInstalled      = $True;
-                        DefaultDuplex        = $True
-                        DefaultColor         = $False;
-                        DefaultPaperSize     = "A4";
-                    }
+#                     @{
+#                         Name                 = "PRINTER-02 Colour MFP";
+#                         HostAddress          = "PRINTER-02";
+#                         DriverInstallCommand = "
+#                             Invoke-WebRequest https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/printers/drivers/hp-pw477dw-pcl6-8.0.1329.6720.zip -OutFile $env:temp\hppw477.zip
+#                             Expand-Archive $env:temp\hppw477.zip -DestinationPath $env:temp\hppw477
+#                         "
+#                         DriverFile           = "$env:temp\hppw477\hpmaD5114_x64.inf";
+#                         DriverName           = "HP PageWide Pro 477dw MFP PCL-6";
+#                         DuplexInstalled      = $True;
+#                         DefaultDuplex        = $True
+#                         DefaultColor         = $False;
+#                         DefaultPaperSize     = "A4";
+#                     }
                     @{
                         Name                 = "PRINTER-03 Colour MFP";
                         HostAddress          = "192.168.0.233";
