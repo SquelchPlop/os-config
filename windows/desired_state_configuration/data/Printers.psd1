@@ -6,7 +6,7 @@
             TestScript = { return $false } #Always apply in case new printers added
             SetScript  = {
                 #Only printers in this list can be installed.  Any printers outside this list will be removed.
-                $AllowedPrinters = "PRINTER-01 Mono Laser", "PRINTER-02 Colour MFP", "Microsoft Print to PDF"
+                $AllowedPrinters = "PRINTER-01 Mono Laser", "PRINTER-02 Colour MFP", "PRINTER-03 Colour MFP", "Microsoft Print to PDF"
 
                 #To get minimal drivers (incl. INF file), install the manufacturer driver, then find the driver's directory in the driver store, without the crap.
                 $Printers = @(
@@ -32,6 +32,17 @@
                         "
                         DriverFile           = "$env:temp\hppw477\hpmaD5114_x64.inf";
                         DriverName           = "HP PageWide Pro 477dw MFP PCL-6";
+                        DuplexInstalled      = $True;
+                        DefaultDuplex        = $True
+                        DefaultColor         = $False;
+                        DefaultPaperSize     = "A4";
+                    }
+                    @{
+                        Name                 = "PRINTER-03 Colour MFP";
+                        HostAddress          = "PRINTER-03";
+                        #DriverInstallCommand = ""
+                        #DriverFile           = "$env:temp\hppw477\hpmaD5114_x64.inf";
+                        #DriverName           = "HP PageWide Pro 477dw MFP PCL-6";
                         DuplexInstalled      = $True;
                         DefaultDuplex        = $True
                         DefaultColor         = $False;
