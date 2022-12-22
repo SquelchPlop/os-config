@@ -31,7 +31,7 @@
             Data         = 'jbkfoedolllekgbhcbcoahefnbanhhlh'
         }
         @{
-            Name         = 'Microsoft Edge > Extensions > Control which extensions are installed silently (I don't care about cookies)'
+            Name         = 'Microsoft Edge > Extensions > Control which extensions are installed silently (I dont care about cookies)'
             Ensure       = 'Present'
             PolicyType   = 'Machine'
             KeyValueName = 'SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallForcelist\3'
