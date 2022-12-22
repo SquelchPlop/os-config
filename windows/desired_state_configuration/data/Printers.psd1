@@ -39,7 +39,7 @@
                     }
                     @{
                         Name                 = "PRINTER-03 Colour MFP";
-                        HostAddress          = "PRINTER-03";
+                        HostAddress          = "192.168.0.233";
                         DriverInstallCommand = "
                             Invoke-WebRequest https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/printers/drivers/canon-gx7000-1.02.zip -OutFile $env:temp\canon.zip
                             Expand-Archive $env:temp\canon.zip -DestinationPath $env:temp\canon
