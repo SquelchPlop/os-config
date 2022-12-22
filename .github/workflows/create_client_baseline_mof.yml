@@ -12,14 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set PowerShell version
-      run: |
-        $PSVersionTable
-        powershell -version 5.1
-        $PSVersionTable
-
     - name: Generate MOF
-      run: ./windows/desired_state_configuration/scripts/generate_mofs.ps1
+      run: powershell -version 5.1 -file ./windows/desired_state_configuration/scripts/generate_mofs.ps1
 
     - uses: actions/upload-artifact@v2
       with:
