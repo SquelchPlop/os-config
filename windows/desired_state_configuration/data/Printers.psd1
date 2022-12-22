@@ -40,9 +40,12 @@
                     @{
                         Name                 = "PRINTER-03 Colour MFP";
                         HostAddress          = "PRINTER-03";
-                        #DriverInstallCommand = ""
-                        #DriverFile           = "$env:temp\hppw477\hpmaD5114_x64.inf";
-                        #DriverName           = "HP PageWide Pro 477dw MFP PCL-6";
+                        DriverInstallCommand = "
+                            Invoke-WebRequest https://raw.githubusercontent.com/SquelchPlop/os-config/master/windows/printers/drivers/canon-gx7000-1.02.zip -OutFile $env:temp\canon.zip
+                            Expand-Archive $env:temp\canon.zip -DestinationPath $env:temp\canon
+                        "
+                        DriverFile           = "$env:temp\canon\GX7000U.inf";
+                        DriverName           = "Canon GX7000 series";
                         DuplexInstalled      = $True;
                         DefaultDuplex        = $True
                         DefaultColor         = $False;
