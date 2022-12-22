@@ -48,7 +48,7 @@
                         DriverName           = "Canon GX7000 series";
                         DuplexInstalled      = $True;
                         DefaultDuplex        = $True
-                        DefaultColor         = $False;
+                        DefaultColor         = $True;
                         DefaultPaperSize     = "A4";
                     }
                 )
